@@ -3,7 +3,7 @@ import { runContextAnalysis } from "@/core/manageContextChanges.js";
 import {
   getFeatureReference,
   getFeatureParentReference,
-  getLastFeatureId
+  getLastFeatureId,
 } from "@/core/featureModel.js";
 
 import instance from "@/store/modules/axios.config";
@@ -19,9 +19,9 @@ const state = {
     fm_context_agents: [],
     agents: {
       list: [],
-      index: 0
-    }
-  }
+      index: 0,
+    },
+  },
 };
 
 const mutations = {
@@ -87,7 +87,7 @@ const mutations = {
     if (payload === feature_tree[0].id) return;
 
     let parent = getFeatureParentReference(payload, feature_tree[0]);
-    parent.children = parent.children.filter(node => {
+    parent.children = parent.children.filter((node) => {
       return node.id !== payload;
     });
 
@@ -102,7 +102,7 @@ const mutations = {
 
   deleteContext(state) {
     state.featureModel.contexts = state.featureModel.contexts.filter(
-      context => {
+      (context) => {
         return !context.isTheCurrent;
       }
     );
@@ -113,7 +113,7 @@ const mutations = {
   },
 
   renameContext(state, payload) {
-    state.featureModel.contexts.map(context => {
+    state.featureModel.contexts.map((context) => {
       if (context.isTheCurrent) {
         context.name = payload;
         state.hasChanged = true;
@@ -122,23 +122,23 @@ const mutations = {
   },
 
   selectContext(state, payload) {
-    state.featureModel.contexts.map(context => {
+    state.featureModel.contexts.map((context) => {
       if (context.name === payload) context["isTheCurrent"] = true;
       else context["isTheCurrent"] = false;
     });
   },
 
   changeFeatureStatus(state, payload) {
-    state.featureModel.contexts.map(context => {
+    state.featureModel.contexts.map((context) => {
       if (context.isTheCurrent) {
         let feature = context.resolutions.filter(
-          feature => feature.feature_id === payload.id
+          (feature) => feature.feature_id === payload.id
         )[0];
 
         if (!feature)
           context.resolutions.push({
             feature_id: payload.id,
-            status: payload.status
+            status: payload.status,
           });
         else feature.status = payload.status;
       }
@@ -146,10 +146,10 @@ const mutations = {
   },
 
   discardContextFeature(state, payload) {
-    state.featureModel.contexts.map(context => {
+    state.featureModel.contexts.map((context) => {
       if (context.isTheCurrent)
         context.resolutions = context.resolutions.filter(
-          feature => feature.feature_id !== payload.id
+          (feature) => feature.feature_id !== payload.id
         );
     });
   },
@@ -157,7 +157,7 @@ const mutations = {
   saveConstraints(state, payload) {
     state.featureModel.constraints = payload;
     state.hasChanged = true;
-  }
+  },
 };
 
 const actions = {
@@ -165,9 +165,9 @@ const actions = {
     let url = `/xml/xml-to-json`;
     await instance
       .post(url, {
-        xmlString: xmlString
+        xmlString: xmlString,
       })
-      .then(res => {
+      .then((res) => {
         let fModel = res.data;
         fModel["allowEdit"] = true;
         fModel["public"] = false;
@@ -175,7 +175,7 @@ const actions = {
         context.commit("setFeatureModel", fModel);
         context.commit("setHasChanged", true);
         context.commit("qualityMeasures/resetGroupedMeasuresThresholds", null, {
-          root: true
+          root: true,
         });
 
         router.push("/fmodel-manager");
@@ -187,9 +187,9 @@ const actions = {
     await instance
       .post(url, {
         featureModel: state.featureModel,
-        withContexts: payload
+        withContexts: payload,
       })
-      .then(res => {
+      .then((res) => {
         let blob = new Blob([res.data], { type: "text/xml" });
         let url = window.URL.createObjectURL(blob);
         const link = document.createElement("a");
@@ -205,7 +205,7 @@ const actions = {
     context.commit("setFeatureModel", data);
     context.commit("setHasChanged", false);
     context.commit("qualityMeasures/resetGroupedMeasuresThresholds", null, {
-      root: true
+      root: true,
     });
     router.push(`/fmodel-manager/${data["_id"]}`);
   },
@@ -215,11 +215,11 @@ const actions = {
       let features = runContextAnalysis(data, state.featureModel);
 
       if (typeof data.status == "boolean") {
-        features.map(feature => {
+        features.map((feature) => {
           context.commit("changeFeatureStatus", feature);
         });
       } else {
-        features.map(feature => {
+        features.map((feature) => {
           context.commit("discardContextFeature", feature);
         });
       }
@@ -237,9 +237,9 @@ const actions = {
       .post(url, {
         allowEdit: true,
         public: false,
-        featureModelJson: JSON.stringify(payload)
+        featureModelJson: JSON.stringify(payload),
       })
-      .then(res => {
+      .then((res) => {
         let fModel = JSON.parse(res.data.newFeatureModel.featureModelJson);
         fModel["_id"] = res.data.newFeatureModel["_id"];
         fModel["allowEdit"] = res.data.newFeatureModel["allowEdit"];
@@ -249,13 +249,13 @@ const actions = {
         context.commit("setFeatureModel", fModel);
         context.commit("setHasChanged", false);
         context.commit("qualityMeasures/resetGroupedMeasuresThresholds", null, {
-          root: true
+          root: true,
         });
         router.push(`/fmodel-manager/${fModel["_id"]}`);
       });
   },
 
-  updateFeatureModelOnDatabase: async context => {
+  updateFeatureModelOnDatabase: async (context) => {
     let fModel = state.featureModel;
 
     if (!fModel["_id"]) {
@@ -265,13 +265,13 @@ const actions = {
       }
       await context.dispatch("createFeatureModelOnDatabase", {
         ...fModel,
-        type: type
+        type: type,
       });
     } else {
       let url = `/featuremodels/update/${fModel["_id"]}`;
       await instance
         .put(url, { featureModelJson: JSON.stringify(fModel) })
-        .then(res => {
+        .then((res) => {
           const { updatedFeatureModel } = res.data;
           let data = JSON.parse(res.data.updatedFeatureModel.featureModelJson);
           data["_id"] = updatedFeatureModel._id;
@@ -287,7 +287,7 @@ const actions = {
     let url = `/featuremodels/get/${payload}`;
     await instance
       .get(url)
-      .then(res => {
+      .then((res) => {
         const { returnedFeatureModel } = res.data;
         let data = JSON.parse(returnedFeatureModel.featureModelJson);
         data["_id"] = returnedFeatureModel._id;
@@ -296,17 +296,17 @@ const actions = {
         data["user"] = returnedFeatureModel.user;
         context.commit("setFeatureModel", data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err.message);
       });
-  }
+  },
 };
 
 const getters = {
-  getError: state => state.error,
-  getHasChanged: state => state.hasChanged,
-  getFeatureModel: state => state.featureModel,
-  getFeatureModelContext: state => state.featureModel.contexts
+  getError: (state) => state.error,
+  getHasChanged: (state) => state.hasChanged,
+  getFeatureModel: (state) => state.featureModel,
+  getFeatureModelContext: (state) => state.featureModel.contexts,
 };
 
 export default {
@@ -314,5 +314,5 @@ export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
 };

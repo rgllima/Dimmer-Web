@@ -1,7 +1,7 @@
 <template>
   <div class="link-feature-modal">
     <b-modal :active="active" :width="300" :can-cancel="false">
-      <div class="box" style="padding: 15px;">
+      <div class="box" style="padding: 15px">
         <h5 class="has-text-centered">Linking Agents</h5>
 
         <div class="box">
@@ -73,7 +73,7 @@
               Cancel
             </button>
           </div>
-          <div class="control" style="width: 50%;margin: 0; text-align: right">
+          <div class="control" style="width: 50%; margin: 0; text-align: right">
             <button class="button is-success is-inverted" @click="action">
               Link
             </button>
@@ -89,13 +89,13 @@ export default {
   name: "LinkFeatureModal",
   props: {
     active: Boolean,
-    contextAgents: Array
+    contextAgents: Array,
   },
   data() {
     return {
       agent: { contexts: [] },
       context: { states: [] },
-      state: {}
+      state: {},
     };
   },
   methods: {
@@ -113,8 +113,8 @@ export default {
       this.agent = { contexts: [] };
       this.context = { states: [] };
       this.state = {};
-    }
-  }
+    },
+  },
 };
 </script>
 

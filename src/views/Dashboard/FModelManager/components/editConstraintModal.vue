@@ -10,14 +10,17 @@
             <p class="subtitle has-text-centered">Feature List</p>
 
             <article v-for="(feature, index) in featureList" :key="index">
-              <b-checkbox :id="`checkbox-${feature.id}`" :native-value="feature" v-model="selectedFeatures">
+              <b-checkbox
+                :id="`checkbox-${feature.id}`"
+                :native-value="feature"
+                v-model="selectedFeatures"
+              >
                 <p>
-                  <i :class="getIcon(feature.type )"></i>
-                  {{feature.name}}
+                  <i :class="getIcon(feature.type)"></i>
+                  {{ feature.name }}
                 </p>
               </b-checkbox>
             </article>
-
           </div>
           <div class="modal-card__button-middle">
             <button class="button is-success" @click="addConstraint">
@@ -37,8 +40,12 @@
       </div>
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-danger" type="button" @click="$parent.close()">Cancel</button>
-      <button class="button is-success" @click="saveConstraints">Save and Close</button>
+      <button class="button is-danger" type="button" @click="$parent.close()">
+        Cancel
+      </button>
+      <button class="button is-success" @click="saveConstraints">
+        Save and Close
+      </button>
     </footer>
   </div>
 </template>
@@ -47,7 +54,7 @@
 import ConstraintCard from "./ConstraintCard";
 export default {
   components: {
-    ConstraintCard
+    ConstraintCard,
   },
   props: ["constraints", "featureList"],
   data() {
@@ -55,7 +62,7 @@ export default {
       active: false,
       selectedFeatures: [],
       myConstraints: [],
-      ctsIndex: 0
+      ctsIndex: 0,
     };
   },
 
@@ -76,13 +83,13 @@ export default {
       }
 
       let list = [];
-      this.selectedFeatures.map(feature => {
+      this.selectedFeatures.map((feature) => {
         list.push({ feature: feature.name, val: true, id: feature.id });
       });
 
       this.myConstraints.push({
         name: `constraint_${++this.ctsIndex}`,
-        list: list
+        list: list,
       });
 
       this.selectedFeatures = [];
@@ -94,9 +101,9 @@ export default {
     },
 
     changeConstraintValue(feature) {
-      this.myConstraints.map(constraint => {
+      this.myConstraints.map((constraint) => {
         if (constraint.name === feature.name) {
-          constraint.list.map(ftr => {
+          constraint.list.map((ftr) => {
             if (ftr.id === feature.id) ftr.val = feature.val;
           });
         }
@@ -105,13 +112,13 @@ export default {
     },
 
     deleteConstraint(payload) {
-      this.myConstraints = this.myConstraints.filter(constraint => {
+      this.myConstraints = this.myConstraints.filter((constraint) => {
         return constraint.name !== payload;
       });
     },
 
     searchConstraintIndex() {
-      this.constraints.map(constraint => {
+      this.constraints.map((constraint) => {
         let index = constraint.name.split("_")[1];
         if (index > this.ctsIndex) this.ctsIndex = index;
       });
@@ -120,15 +127,15 @@ export default {
     showMessage(message, color) {
       this.$toast.open({
         message: message,
-        type: color
+        type: color,
       });
-    }
+    },
   },
 
   mounted() {
     this.myConstraints = JSON.parse(JSON.stringify(this.constraints));
     this.searchConstraintIndex();
-  }
+  },
 };
 </script>
 

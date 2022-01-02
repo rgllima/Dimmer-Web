@@ -26,7 +26,7 @@ class AdaptationMechanism {
     console.log(aggregation);
 
     const dependencyGraph = this._extractDependencies(feature_tree[0]);
-    const filtered = dependencyGraph.filter(obj => obj.affectedBy.length);
+    const filtered = dependencyGraph.filter((obj) => obj.affectedBy.length);
 
     let affectedFeatureMapping = [];
     for (const agg of aggregation) {
@@ -36,7 +36,7 @@ class AdaptationMechanism {
       affectedFeatureMapping.push({
         agent: agg.agent,
         value: agg.value,
-        affects: sortedAffects
+        affects: sortedAffects,
       });
     }
 
@@ -142,8 +142,8 @@ class AdaptationMechanism {
     const a = { address: feature.id, affectedBy: [] };
 
     if (feature.states) {
-      feature.states.map(state => {
-        state.requires.map(obj => a.affectedBy.push(obj.address));
+      feature.states.map((state) => {
+        state.requires.map((obj) => a.affectedBy.push(obj.address));
       });
     }
 

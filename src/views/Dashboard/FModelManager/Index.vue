@@ -42,6 +42,14 @@
           >
             <apply-measures />
           </b-tab-item>
+          <b-tab-item
+            class="fmodel-item"
+            label="Quality Assessment"
+            icon-pack="fas"
+            icon="chart-line"
+          >
+            <quality-assessment />
+          </b-tab-item>
         </b-tabs>
       </div>
     </div>
@@ -53,6 +61,7 @@ import FeatureEditor from "./FeatureEditor";
 import ContextManager from "./ContextManager";
 import ApplyMeasures from "./ApplyMeasures";
 import FModelControl from "./FModelControl";
+import QualityAssessment from "./QualityAssessment";
 import { mapGetters } from "vuex";
 
 export default {
@@ -60,18 +69,19 @@ export default {
     "context-manager": ContextManager,
     "feature-editor": FeatureEditor,
     "apply-measures": ApplyMeasures,
-    "fmodel-control": FModelControl
+    "fmodel-control": FModelControl,
+    "quality-assessment": QualityAssessment,
   },
 
   data: () => ({
-    loading: true
+    loading: true,
   }),
 
   computed: {
     ...mapGetters({
       featureModel: "featureModel/getFeatureModel",
-      error: "featureModel/getError"
-    })
+      error: "featureModel/getError",
+    }),
   },
 
   watch: {
@@ -79,10 +89,10 @@ export default {
       if (this.error)
         this.$toast.open({
           message: this.error,
-          type: "is-danger"
+          type: "is-danger",
         });
       this.$store.commit("featureModel/setError", null);
-    }
+    },
   },
 
   methods: {
@@ -101,7 +111,7 @@ export default {
 
     setLoading(value) {
       this.loading = value;
-    }
+    },
   },
 
   mounted() {
@@ -112,7 +122,7 @@ export default {
     } else {
       this.loading = false;
     }
-  }
+  },
 };
 </script>
 

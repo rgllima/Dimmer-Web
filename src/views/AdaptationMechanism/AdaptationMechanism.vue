@@ -122,7 +122,7 @@
                         <button
                           v-if="!simulating"
                           class="button is-small is-danger"
-                          style="margin-left: 5px;"
+                          style="margin-left: 5px"
                           @click="removeAgent(agent.id)"
                         >
                           Del Agent
@@ -151,7 +151,7 @@
                         @click="
                           removeContext({
                             agent_id: agent.id,
-                            context_id: context.id
+                            context_id: context.id,
                           })
                         "
                         ><b-icon
@@ -193,24 +193,24 @@ export default {
   props: {
     modalActive: {
       type: Boolean,
-      default: false
+      default: false,
     },
     featureTree: {
       type: Array,
-      required: true
+      required: true,
     },
     constraints: {
       type: Array,
-      default: Array
+      default: Array,
     },
     fMContextAgents: {
       type: Array,
-      default: Array
+      default: Array,
     },
     agents: {
       type: Object,
-      default: Object
-    }
+      default: Object,
+    },
   },
   data() {
     return {
@@ -225,12 +225,12 @@ export default {
       agentIndexNum: 1,
       dictionary: {
         context_agents: {},
-        features: {}
+        features: {},
       },
       model: {
         feature_tree: [],
-        context_agents: []
-      }
+        context_agents: [],
+      },
     };
   },
 
@@ -249,10 +249,10 @@ export default {
           if (!this.model.context_agents.length) return;
           this.$store.commit("featureModel/setAgents", {
             list: this.model.context_agents,
-            index: this.agentIndexNum
+            index: this.agentIndexNum,
           });
         }
-      }
+      },
     },
 
     "model.feature_tree": {
@@ -263,8 +263,8 @@ export default {
           "featureModel/setFmContextAgents",
           this.model.feature_tree
         );
-      }
-    }
+      },
+    },
   },
 
   methods: {
@@ -300,21 +300,21 @@ export default {
         id: `ca_${this.agentIndexNum}`,
         name,
         ctxIndex: 1,
-        contexts: []
+        contexts: [],
       });
 
       this.agentIndexNum++;
     },
 
     removeAgent(id) {
-      const agent = this.model.context_agents.find(ctx => ctx.id === id);
+      const agent = this.model.context_agents.find((ctx) => ctx.id === id);
       for (const context of agent.contexts) {
         delete this.dictionary.context_agents[context.id];
-        this.unlinkFeature(context.id)
+        this.unlinkFeature(context.id);
       }
 
       this.model.context_agents = this.model.context_agents.filter(
-        obj => obj !== agent
+        (obj) => obj !== agent
       );
     },
 
@@ -327,15 +327,15 @@ export default {
         value: false,
         states: [
           { name: "Off", value: false },
-          { name: "On", value: true }
-        ]
+          { name: "On", value: true },
+        ],
       };
 
       this.agent.ctxIndex++;
       this.agent.contexts.push(context);
       this.dictionary.context_agents[context.id] = {
         name: `${this.agent.name}_${context.name}`,
-        ref: context
+        ref: context,
       };
     },
 
@@ -370,8 +370,8 @@ export default {
         [
           {
             in: this.linkingFeatureId,
-            val: payload
-          }
+            val: payload,
+          },
         ]
       );
 
@@ -395,7 +395,7 @@ export default {
     createFeatureDictionary(feature) {
       this.dictionary.features[feature.id] = {
         name: feature.name,
-        ref: feature
+        ref: feature,
       };
 
       for (const child of feature.children) {
@@ -408,7 +408,7 @@ export default {
         for (const context of agent.contexts) {
           this.dictionary.context_agents[context.id] = {
             name: `${agent.name}_${context.name}`,
-            ref: context
+            ref: context,
           };
         }
       }
@@ -454,7 +454,7 @@ export default {
     // 3rd Phase - Push Constraints into fModel as States
     pushConstrainsAsStates(feature, constraints = []) {
       const hasRelatedConstraints = constraints.filter(
-        constraint => constraint.in === feature.id
+        (constraint) => constraint.in === feature.id
       );
 
       if (hasRelatedConstraints.length) {
@@ -462,7 +462,7 @@ export default {
           for (const state of feature.states) {
             if (state.name === "On") {
               const exists = state.requires.filter(
-                obj => obj.address === constraint.val.address
+                (obj) => obj.address === constraint.val.address
               );
 
               if (!exists.length) {
@@ -476,7 +476,7 @@ export default {
       for (let child of feature.children) {
         child = {
           ...child,
-          ...this.pushConstrainsAsStates(child, constraints)
+          ...this.pushConstrainsAsStates(child, constraints),
         };
       }
 
@@ -496,7 +496,7 @@ export default {
       for (let child of feature.children) {
         child = {
           ...child,
-          ...this.popConstrainsAsStates(child, contextId)
+          ...this.popConstrainsAsStates(child, contextId),
         };
       }
 
@@ -521,13 +521,13 @@ export default {
           for (const state of feature.states) {
             if (state.name === "On") {
               const exists = state.requires.filter(
-                obj => obj.address === req.id
+                (obj) => obj.address === req.id
               );
 
               if (!exists.length) {
                 state.requires.push({
                   address: req.id,
-                  value: false
+                  value: false,
                 });
               }
             }
@@ -538,7 +538,7 @@ export default {
       for (let child of feature.children) {
         child = {
           ...child,
-          ...this.searchAndSetRelatedLeaves(child, relatedLeaves)
+          ...this.searchAndSetRelatedLeaves(child, relatedLeaves),
         };
       }
 
@@ -557,40 +557,40 @@ export default {
           {
             name: "Off",
             value: false,
-            requires: []
+            requires: [],
           },
           {
             name: "On",
             value: true,
-            requires: []
-          }
+            requires: [],
+          },
         ],
-        children: []
+        children: [],
       };
     },
 
     convertConstraints(constraints = []) {
       let parsed = [];
-      constraints.map(constraint => {
+      constraints.map((constraint) => {
         const [ft1, ft2] = constraint.list;
         if (!ft1.val && !ft2.val) {
           parsed.push({
             in: ft1.id,
-            val: { address: ft2.id, value: false }
+            val: { address: ft2.id, value: false },
           });
           parsed.push({
             in: ft2.id,
-            val: { address: ft1.id, value: false }
+            val: { address: ft1.id, value: false },
           });
         } else if (!ft1.val) {
           parsed.push({
             in: ft1.id,
-            val: { address: ft2.id, value: true }
+            val: { address: ft2.id, value: true },
           });
         } else if (!ft2.val) {
           parsed.push({
             in: ft2.id,
-            val: { address: ft1.id, value: true }
+            val: { address: ft1.id, value: true },
           });
         }
       });
@@ -600,7 +600,7 @@ export default {
     handleCloseModal() {
       this.simulating = false;
       this.$emit("close");
-    }
+    },
   },
 
   mounted() {
@@ -616,7 +616,7 @@ export default {
       );
       this.createFeatureDictionary(this.model.feature_tree[0]);
     }
-  }
+  },
 };
 </script>
 

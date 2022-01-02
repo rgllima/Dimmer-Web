@@ -15,7 +15,10 @@
           <span>Create Child Feature</span>
         </li>
 
-        <li v-if="node.model.type !== 'r' && node.model.type !== ''" @click="action('swapType')">
+        <li
+          v-if="node.model.type !== 'r' && node.model.type !== ''"
+          @click="action('swapType')"
+        >
           <span class="icon">
             <i class="fas fa-exchange-alt"></i>
           </span>
@@ -30,7 +33,11 @@
           </span>
           <span>Rename</span>
         </li>
-        <li class="is-danger" v-if="node.model.type !== 'r'" @click="confirmeDeletion">
+        <li
+          class="is-danger"
+          v-if="node.model.type !== 'r'"
+          @click="confirmeDeletion"
+        >
           <span class="icon">
             <i class="fas fa-trash-alt"></i>
           </span>
@@ -47,11 +54,15 @@
           </span>
           <span>Back</span>
         </li>
-        <li v-for="(item, index) in data" :key="index" @click="action(item.title)">
+        <li
+          v-for="(item, index) in data"
+          :key="index"
+          @click="action(item.title)"
+        >
           <span class="icon">
             <i :class="item.icon"></i>
           </span>
-          <span>{{item.title}}</span>
+          <span>{{ item.title }}</span>
         </li>
       </ul>
     </div>
@@ -68,7 +79,7 @@ export default {
       whoisNode: "node",
       showContext: false,
       showOption: false,
-      menuStyle: null
+      menuStyle: null,
     };
   },
 
@@ -90,7 +101,7 @@ export default {
         type: "is-danger",
         cancelText: "Cancel",
         confirmText: "Delete",
-        onConfirm: () => this.action("Remove")
+        onConfirm: () => this.action("Remove"),
       });
     },
 
@@ -101,7 +112,7 @@ export default {
       this.$nextTick(() => {
         this.showOption = true;
       });
-    }
+    },
   },
 
   watch: {
@@ -122,17 +133,17 @@ export default {
           "border-radius": "5px",
           "background-color": "#fff",
           "box-shadow": "2px 2px 2px #aaa",
-          "z-index": 20
+          "z-index": 20,
         };
         this.showContext = true;
         this.showOption = false;
       }
-    }
+    },
   },
 
   mounted() {
     this.data = this.node.validChildren;
-  }
+  },
 };
 </script>
 

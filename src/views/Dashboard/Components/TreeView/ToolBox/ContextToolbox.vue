@@ -7,7 +7,11 @@
         </span>
         <span>Active Feature</span>
       </li>
-      <li class="is-danger" v-if="node.model.type !== 'm'" @click="desactiveContextFeature">
+      <li
+        class="is-danger"
+        v-if="node.model.type !== 'm'"
+        @click="desactiveContextFeature"
+      >
         <span class="icon">
           <i class="fas fa-times"></i>
         </span>
@@ -34,7 +38,7 @@ export default {
       showContext: false,
       menuStyle: null,
       multiplicity: null,
-      feature: {}
+      feature: {},
     };
   },
 
@@ -73,12 +77,12 @@ export default {
       father["multiplicity"] = this.node.parent.multiplicity;
 
       this.feature["father"] = father;
-    }
+    },
   },
 
   watch: {
     async clickedOutside() {
-      console.log("Cliquei fora")
+      console.log("Cliquei fora");
       if (this.clickedOutside) {
         this.showContext = false;
       }
@@ -99,12 +103,12 @@ export default {
           "border-radius": "5px",
           "background-color": "#fff",
           "box-shadow": "2px 2px 2px #aaa",
-          "z-index": 20
+          "z-index": 20,
         };
         this.showContext = true;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

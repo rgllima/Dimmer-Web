@@ -40,7 +40,7 @@
             editorToolbox
           ></v-treeview>
         </div>
-        <div class="tile is-child is-vertical" style="padding-left:10px">
+        <div class="tile is-child is-vertical" style="padding-left: 10px">
           <div class="tile is-vertical">
             <div class="tile is-child">
               <div class="card box">
@@ -109,7 +109,7 @@ export default {
     AdaptationMechanism,
     "constraint-card": ConstraintCard,
     "feature-info": FeatureInfoCard,
-    "constraint-modal": EditConstraintModal
+    "constraint-modal": EditConstraintModal,
   },
 
   data() {
@@ -121,7 +121,7 @@ export default {
       parsingConstraints: false,
       fm_context_agents: [],
       constraintModalActive: false,
-      adaptationMechanismModal: false
+      adaptationMechanismModal: false,
     };
   },
 
@@ -157,13 +157,13 @@ export default {
             conFeatures.push({
               val: false,
               feature: ftNameReplaced.replace(`~ `, ``),
-              id: id
+              id: id,
             });
           else conFeatures.push({ val: true, feature: ftNameReplaced, id: id });
         }
         this.constraints.push({
           name: ftConstraints[index].name,
-          list: conFeatures
+          list: conFeatures,
         });
       }
       this.parsingConstraints = false;
@@ -207,7 +207,7 @@ export default {
 
     async saveConstraints(payload) {
       let constraints = [];
-      payload.map(cts => {
+      payload.map((cts) => {
         let value = "";
 
         for (const i in cts.list) {
@@ -219,18 +219,18 @@ export default {
         constraints.push({ name: cts.name, value: value });
       });
       await this.$store.commit("featureModel/saveConstraints", constraints);
-    }
+    },
   },
 
   computed: {
     ...mapGetters({
-      featureModel: "featureModel/getFeatureModel"
-    })
+      featureModel: "featureModel/getFeatureModel",
+    }),
   },
 
   watch: {
     featureModel: {
-      handler: function() {
+      handler: function () {
         this.featureTree = JSON.parse(
           JSON.stringify(this.featureModel.feature_tree)
         );
@@ -238,8 +238,8 @@ export default {
         this.generateVisualConstraints();
         this.createFeatureList(this.featureModel.feature_tree[0]);
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
 
   mounted() {
@@ -250,7 +250,7 @@ export default {
         JSON.stringify(this.featureModel.feature_tree)
       );
     }
-  }
+  },
 };
 </script>
 

@@ -25,7 +25,9 @@
           <p class="control is-expanded">
             <input
               class="input"
-              :class="[!fModel.creator.trim().length ? 'is-danger' : 'is-success']"
+              :class="[
+                !fModel.creator.trim().length ? 'is-danger' : 'is-success',
+              ]"
               type="text"
               placeholder="Author"
               v-model="fModel.creator"
@@ -43,7 +45,7 @@
           <textarea
             class="textarea"
             :class="[
-              !fModel.description.trim().length ? 'is-danger' : 'is-success'
+              !fModel.description.trim().length ? 'is-danger' : 'is-success',
             ]"
             placeholder="Write a brief description of the Feature Model..."
             v-model="fModel.description"
@@ -59,9 +61,9 @@
           <label class="label">Email</label>
           <p class="control is-expanded">
             <input
-              class="input "
+              class="input"
               :class="[
-                !validateEmail(fModel.email) ? 'is-danger' : 'is-success'
+                !validateEmail(fModel.email) ? 'is-danger' : 'is-success',
               ]"
               type="email"
               placeholder="Email"
@@ -73,7 +75,12 @@
         <div class="field">
           <label class="label">Phone</label>
           <p class="control is-expanded">
-            <input class="input" type="text" placeholder="Phone" v-model="fModel.phone" />
+            <input
+              class="input"
+              type="text"
+              placeholder="Phone"
+              v-model="fModel.phone"
+            />
           </p>
         </div>
       </div>
@@ -84,13 +91,23 @@
         <div class="field">
           <label class="label">Address</label>
           <p class="control is-expanded">
-            <input class="input" type="text" placeholder="Address" v-model="fModel.address" />
+            <input
+              class="input"
+              type="text"
+              placeholder="Address"
+              v-model="fModel.address"
+            />
           </p>
         </div>
         <div class="field">
           <label class="label">Website</label>
           <p class="control is-expanded">
-            <input class="input" type="text" placeholder="Website" v-model="fModel.website" />
+            <input
+              class="input"
+              type="text"
+              placeholder="Website"
+              v-model="fModel.website"
+            />
           </p>
         </div>
       </div>
@@ -100,13 +117,23 @@
       <div class="field">
         <label class="label">Organization</label>
         <p class="control is-expanded">
-          <input class="input" type="text" placeholder="Organization" v-model="fModel.organization" />
+          <input
+            class="input"
+            type="text"
+            placeholder="Organization"
+            v-model="fModel.organization"
+          />
         </p>
       </div>
       <div class="field">
         <label class="label">Department</label>
         <p class="control is-expanded">
-          <input class="input" type="text" placeholder="Department" v-model="fModel.department" />
+          <input
+            class="input"
+            type="text"
+            placeholder="Department"
+            v-model="fModel.department"
+          />
         </p>
       </div>
     </div>
@@ -128,7 +155,7 @@
   </div>
 </template>
 
- <script>
+<script>
 export default {
   data() {
     return {
@@ -150,15 +177,15 @@ export default {
             id: "_r",
             type: "r",
             name: "",
-            children: []
-          }
+            children: [],
+          },
         ],
         constraints: [],
         contexts: [],
         origin: "DYMMER",
         type: "SPL",
-        number_of_features: 0
-      }
+        number_of_features: 0,
+      },
     };
   },
 
@@ -196,21 +223,22 @@ export default {
     },
 
     validateEmail(email) {
-      let emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      let emailRegex =
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return emailRegex.test(email);
     },
 
     notifyUser(message) {
       this.$toast.open({
         message: message,
-        type: "is-danger"
+        type: "is-danger",
       });
-    }
+    },
   },
 
   mounted() {
     console.log(this.fModel);
-  }
+  },
 };
 </script>
 

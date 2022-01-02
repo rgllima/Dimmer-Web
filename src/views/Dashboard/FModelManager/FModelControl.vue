@@ -3,11 +3,11 @@
     <div class="tile">
       <div class="tile is-ancestor">
         <div class="tile fmodel-status--img" @click="back">
-          <img src="../../../assets/left-arrow.svg" alt="arrow">
+          <img src="../../../assets/left-arrow.svg" alt="arrow" />
         </div>
         <div class="tile is-parent is-vertical">
           <div class="tile">
-            <h1><strong>Title: </strong>{{featureModel.name}}</h1>
+            <h1><strong>Title: </strong>{{ featureModel.name }}</h1>
             <!-- <input class="input" type="text"> -->
           </div>
           <div class="tile">
@@ -55,10 +55,7 @@
             </div>
           </div>
         </div>
-        <div
-          class="tile is-parent"
-          v-if="allowFeatureEdit"
-        >
+        <div class="tile is-parent" v-if="allowFeatureEdit">
           <div class="fmodel-status--changes" v-if="!featureModelChanged">
             <p class>All changes are saved</p>
             <button class="button is-primary" disabled>Saved</button>
@@ -85,7 +82,7 @@ export default {
   data() {
     return {
       saving: false,
-      featureModelControl: {}
+      featureModelControl: {},
     };
   },
 
@@ -93,11 +90,11 @@ export default {
     ...mapGetters({
       featureModel: "featureModel/getFeatureModel",
       featureModelChanged: "featureModel/getHasChanged",
-      computedMeasures: "qualityMeasures/getGroupedMeasuresThresholds"
+      computedMeasures: "qualityMeasures/getGroupedMeasuresThresholds",
     }),
 
     dsplFeatureModel() {
-      return this.featureModel?.type === 'DSPL'
+      return this.featureModel?.type === "DSPL";
     },
 
     allowFeatureEdit() {
@@ -111,7 +108,7 @@ export default {
       if (!loggedUser) return false;
 
       return loggedUser._id === user;
-    }
+    },
   },
 
   methods: {
@@ -149,11 +146,10 @@ export default {
 
     back() {
       this.$router.go(-1);
-    }
-  }
+    },
+  },
 };
 </script>
-
 
 <style lang="sass" scoped>
 @import "../../../assets/css/colors"

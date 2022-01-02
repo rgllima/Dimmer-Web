@@ -1,18 +1,37 @@
 <template>
   <div class="constraint-card">
     <div class="constraint-card__content">
-
       <div v-if="constraints.length !== 0">
-        <div class="constraint-card__list" v-for="(value, key) in constraints" :key="key">
+        <div
+          class="constraint-card__list"
+          v-for="(value, key) in constraints"
+          :key="key"
+        >
           <div class="constraint-card__box">
-            <i v-if="isEditing" class="fas fa-trash danger is-hoverable" @click="deleteConstraint(value.name)" ></i>
-            <strong>{{key+1}}:</strong>
-            <div class="constraint-card__feature" v-for="(feature, key2) in value.list" :key="key2">
-              <i v-if="!feature.val" class="far fa-times-circle danger" @click="changeConstraintValue(value.name, feature.id, true)"></i>
-              <i v-else class="far fa-check-circle green" @click="changeConstraintValue(value.name, feature.id, false)"></i>
-              <p>{{feature.feature}}</p>
-              <p v-if="value.list[key2+1]">
-                <strong>{{` OR `}}</strong>
+            <i
+              v-if="isEditing"
+              class="fas fa-trash danger is-hoverable"
+              @click="deleteConstraint(value.name)"
+            ></i>
+            <strong>{{ key + 1 }}:</strong>
+            <div
+              class="constraint-card__feature"
+              v-for="(feature, key2) in value.list"
+              :key="key2"
+            >
+              <i
+                v-if="!feature.val"
+                class="far fa-times-circle danger"
+                @click="changeConstraintValue(value.name, feature.id, true)"
+              ></i>
+              <i
+                v-else
+                class="far fa-check-circle green"
+                @click="changeConstraintValue(value.name, feature.id, false)"
+              ></i>
+              <p>{{ feature.feature }}</p>
+              <p v-if="value.list[key2 + 1]">
+                <strong>{{ ` OR ` }}</strong>
               </p>
             </div>
           </div>
@@ -37,9 +56,13 @@ export default {
 
     changeConstraintValue(ctsName, id, value) {
       if (!this.isEditing) return;
-      this.$emit("changeConstraintValue", { name: ctsName, id: id, val: value })
-    }
-  }
+      this.$emit("changeConstraintValue", {
+        name: ctsName,
+        id: id,
+        val: value,
+      });
+    },
+  },
 };
 </script>
 

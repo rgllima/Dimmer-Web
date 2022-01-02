@@ -5,7 +5,7 @@
       <div class="select-measures--header-content">
         <p>
           <strong>Feature Type:</strong>
-          {{featureModel.type}}
+          {{ featureModel.type }}
         </p>
         <div class="buttons">
           <div v-if="contexts.length !== 0">
@@ -14,7 +14,9 @@
             </span>
             <b-dropdown v-model="selectedContext" aria-role="list">
               <button class="button is-small is-primary" slot="trigger">
-                <span>{{`${!selectedContext ? "Context List" : selectedContext}`}}</span>
+                <span>{{
+                  `${!selectedContext ? "Context List" : selectedContext}`
+                }}</span>
                 <b-icon icon="menu-down"></b-icon>
               </button>
 
@@ -24,22 +26,24 @@
                 :value="context.name"
                 :key="index"
                 @click="selectContext(context.name)"
-              >{{context.name}}</b-dropdown-item>
+                >{{ context.name }}</b-dropdown-item
+              >
             </b-dropdown>
           </div>
           <button
             class="button select-measures--button is-small"
             @click="applyMeasures"
-          >Apply Measures</button>
+          >
+            Apply Measures
+          </button>
         </div>
       </div>
     </header>
     <div class="select-measures--list">
       <article>
-        <b-checkbox
-          :native-value="true"
-          v-model="checkAll"
-        >{{`${!checkAll ? 'SELECT ALL': 'DESELECT ALL'}`}}</b-checkbox>
+        <b-checkbox :native-value="true" v-model="checkAll">{{
+          `${!checkAll ? "SELECT ALL" : "DESELECT ALL"}`
+        }}</b-checkbox>
       </article>
       <article v-for="(measure, index) in measures" :key="index">
         <b-checkbox
@@ -47,10 +51,9 @@
           :native-value="measure"
           v-model="checkedMeasures"
         >
-          <b-tooltip
-            :label="measure.description"
-            dashed
-          >{{ `${measure.initials} - ${measure.name}` }}</b-tooltip>
+          <b-tooltip :label="measure.description" dashed>{{
+            `${measure.initials} - ${measure.name}`
+          }}</b-tooltip>
         </b-checkbox>
       </article>
     </div>
@@ -69,7 +72,7 @@ export default {
       selectedContext: null,
       switchInput: false,
       checkAll: false,
-      loadingComponent: null
+      loadingComponent: null,
     };
   },
 
@@ -77,15 +80,15 @@ export default {
     checkAll() {
       this.checkedMeasures = [];
       if (this.checkAll)
-        this.measures.map(measure => this.checkedMeasures.push(measure));
-    }
+        this.measures.map((measure) => this.checkedMeasures.push(measure));
+    },
   },
 
   computed: {
     ...mapGetters({
       measures: "qualityMeasures/getMeasures",
-      featureModel: "featureModel/getFeatureModel"
-    })
+      featureModel: "featureModel/getFeatureModel",
+    }),
   },
 
   methods: {
@@ -119,21 +122,21 @@ export default {
 
     loading() {
       this.loadingComponent = this.$loading.open({
-        container: this.$refs.element
+        container: this.$refs.element,
       });
     },
 
     showMessage(message, color) {
       this.$toast.open({
         message: message,
-        type: color
+        type: color,
       });
-    }
+    },
   },
 
   mounted() {
     console.log("CONTEXT: ", this.featureModel);
-  }
+  },
 };
 </script>
 

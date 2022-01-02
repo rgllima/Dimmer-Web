@@ -5,22 +5,37 @@
         v-if="groupedMeasuresThresholds.length == 0"
         class="apply-measures--button button"
         @click="openSelectMeasuresInModal"
-      >Apply Measures</button>
+      >
+        Apply Measures
+      </button>
 
       <div v-else>
-        <button class="apply-measures--button button is-pulled-right" @click="openSelectMeasuresInModal">Reapply Measures</button>
+        <button
+          class="apply-measures--button button is-pulled-right"
+          @click="openSelectMeasuresInModal"
+        >
+          Reapply Measures
+        </button>
         <h1 class="has-text-centered is-size-5">Measures Result</h1>
         <br />
-        <b-table :data="groupedMeasuresThresholds" default-sort-direction="asc" default-sort="name">
+        <b-table
+          :data="groupedMeasuresThresholds"
+          default-sort-direction="asc"
+          default-sort="name"
+        >
           <template slot-scope="props">
-            <b-table-column field="id" label="ID" width="40" numeric>{{ props.index+1 }}</b-table-column>
-            <b-table-column field="name" label="Measure" sortable>{{ props.row.name }}</b-table-column>
-            <b-table-column field="initials" label="Initials" centered>{{ props.row.initials }}</b-table-column>
-            <b-table-column
-              field="measure"
-              label="Measure Value"
-              centered
-            >{{ props.row.value.toFixed(2) }}</b-table-column>
+            <b-table-column field="id" label="ID" width="40" numeric>{{
+              props.index + 1
+            }}</b-table-column>
+            <b-table-column field="name" label="Measure" sortable>{{
+              props.row.name
+            }}</b-table-column>
+            <b-table-column field="initials" label="Initials" centered>{{
+              props.row.initials
+            }}</b-table-column>
+            <b-table-column field="measure" label="Measure Value" centered>{{
+              props.row.value.toFixed(2)
+            }}</b-table-column>
             <b-table-column field="status" label="Thresholds Status" centered>
               <div v-html="checkMeasureStatus(props.row)"></div>
             </b-table-column>
@@ -58,9 +73,9 @@ export default {
         parent: this,
         component: SelectMeasures,
         props: {
-          contexts: this.contexts
+          contexts: this.contexts,
         },
-        hasModalCard: true
+        hasModalCard: true,
       });
     },
   },
@@ -69,13 +84,13 @@ export default {
     ...mapGetters({
       contexts: "featureModel/getFeatureModelContext",
       featureModel: "featureModel/getFeatureModel",
-      groupedMeasuresThresholds: "qualityMeasures/getGroupedMeasuresThresholds"
-    })
+      groupedMeasuresThresholds: "qualityMeasures/getGroupedMeasuresThresholds",
+    }),
   },
 
   mounted() {
     this.$store.dispatch("qualityMeasures/fetchMeasuresOnDatabase");
-  }
+  },
 };
 </script>
 

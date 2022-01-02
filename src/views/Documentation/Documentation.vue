@@ -1,11 +1,11 @@
 <template>
   <section>
-    <div  style="background-color: #636be7">
+    <div style="background-color: #636be7">
       <div class="container">
         <navbar />
       </div>
     </div>
-    <div class="container" style="margin-top: 50px; margin-bottom: 150px;">
+    <div class="container" style="margin-top: 50px; margin-bottom: 150px">
       <h1 class="title">Documentation</h1>
 
       <figure class="image">
@@ -136,7 +136,7 @@
       </div>
     </div>
     <div>
-      <futer/>
+      <futer />
     </div>
   </section>
 </template>
@@ -148,8 +148,8 @@ import Footer from "@/components/Footer/Footer";
 export default {
   components: {
     Navbar,
-    futer: Footer
-  }
+    futer: Footer,
+  },
 };
 </script>
 

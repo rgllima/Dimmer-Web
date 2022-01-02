@@ -125,7 +125,7 @@ export default {
   data() {
     return {
       search: "",
-      type: ""
+      type: "",
     };
   },
 
@@ -134,7 +134,7 @@ export default {
       splList: "featureModelDatabase/getSplList",
       dsplList: "featureModelDatabase/getDsplList",
       privateList: "featureModelDatabase/getPrivateList",
-      loading: "featureModelDatabase/getLoading"
+      loading: "featureModelDatabase/getLoading",
     }),
 
     data() {
@@ -156,16 +156,16 @@ export default {
     },
 
     filteredList() {
-      return this.data.filter(fmodel => {
+      return this.data.filter((fmodel) => {
         return fmodel.name.toLowerCase().includes(this.search.toLowerCase());
       });
-    }
+    },
   },
 
   methods: {
     showFeatureModel(featureModel) {
       this.$store.dispatch("featureModel/showFeatureModel", featureModel);
-    }
+    },
   },
 
   mounted() {
@@ -175,6 +175,6 @@ export default {
     this.$store.dispatch(
       "featureModelDatabase/fetchPrivateFeatureModelsOnDatabase"
     );
-  }
+  },
 };
 </script>

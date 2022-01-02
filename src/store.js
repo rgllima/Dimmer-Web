@@ -5,6 +5,7 @@ import authentication from "@/store/modules/authentication";
 import featureModel from "@/store/modules/featureModel";
 import featureModelDatabase from "@/store/modules/featureModelDatabase";
 import qualityMeasures from "@/store/modules/qualityMeasures";
+import qualityAssessment from "@/store/modules/qualityAssessment";
 
 Vue.use(Vuex);
 
@@ -15,7 +16,8 @@ export default new Vuex.Store({
     authentication,
     featureModel,
     featureModelDatabase,
-    qualityMeasures
+    qualityMeasures,
+    qualityAssessment,
   },
-  strict: debug
+  strict: debug,
 });

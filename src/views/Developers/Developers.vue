@@ -5,7 +5,7 @@
         <navbar />
       </div>
     </div>
-    <div class="container" style="margin-top: 50px; margin-bottom: 150px;">
+    <div class="container" style="margin-top: 50px; margin-bottom: 150px">
       <h1 class="title">Researchers</h1>
 
       <div class="tile is-ancestor">
@@ -122,7 +122,6 @@
           </div>
         </div>
       </div> -->
-
     </div>
     <div>
       <futer />
@@ -149,7 +148,7 @@ export default {
     Navbar,
     futer: Footer,
     DevelopersCard,
-    ResearchersCard
+    ResearchersCard,
   },
   data() {
     return {
@@ -158,73 +157,66 @@ export default {
           name: "Publio Silva",
           github: "publiosilva",
           linkedin: "publio-blenilio-b97a2b130",
-          bio:
-            "Software Engineering student at Federal University of Ceará, Quixada, Ceara, Brazil.",
-          image: publiosilva
+          bio: "Software Engineering student at Federal University of Ceará, Quixada, Ceara, Brazil.",
+          image: publiosilva,
         },
         {
           name: "Rafael Lima",
           github: "rgllima",
           linkedin: "rgllima",
-          bio:
-            "Software Engineering student at Federal University of Ceará, Quixada, Ceara, Brazil.",
-          image: rgllima
+          bio: "Software Engineering student at Federal University of Ceará, Quixada, Ceara, Brazil.",
+          image: rgllima,
         },
         {
           name: "Luan Lima",
           github: "",
           linkedin: "",
-          bio:
-            "Software Engineering student at Federal University of Ceará, Quixada, Ceara, Brazil.",
-          image: "https://bulma.io/images/placeholders/1280x960.png"
+          bio: "Software Engineering student at Federal University of Ceará, Quixada, Ceara, Brazil.",
+          image: "https://bulma.io/images/placeholders/1280x960.png",
         },
         {
           name: "Anderson Uchoa",
           github: "anderson-uchoa",
           linkedin: "andersongnuchoa",
-          bio:
-            "PhD candidate in Software Engineering, Researcher at LES/PUC-Rio & MSc in Software Engineering.",
-          image: anderson
+          bio: "PhD candidate in Software Engineering, Researcher at LES/PUC-Rio & MSc in Software Engineering.",
+          image: anderson,
         },
         {
           name: "Jefferson",
           github: "",
           linkedin: "",
-          bio:
-            "Software Engineering student at Federal University of Ceará, Quixada, Ceara, Brazil.",
-          image: "https://bulma.io/images/placeholders/1280x960.png"
+          bio: "Software Engineering student at Federal University of Ceará, Quixada, Ceara, Brazil.",
+          image: "https://bulma.io/images/placeholders/1280x960.png",
         },
         {
           name: "Holanda Júnior",
           github: "",
           linkedin: "",
-          bio:
-            "Software Engineering student at Federal University of Ceará, Quixada, Ceara, Brazil.",
-          image: "https://bulma.io/images/placeholders/1280x960.png"
-        }
+          bio: "Software Engineering student at Federal University of Ceará, Quixada, Ceara, Brazil.",
+          image: "https://bulma.io/images/placeholders/1280x960.png",
+        },
       ],
       researchers: [
         {
           name: "Dra. Carla Ilane",
           lattes: "http://lattes.cnpq.br/4277471687235814",
           bio: "She is an adjunct professor at the Federal University of Ceará (UFC) at the Quixadá Campus. He holds a doctorate in Computer Science from the Federal University of Ceará - UFC (2016) and a master's degree in Applied Informatics from the University of Fortaleza - UNIFOR (2009). Acted as a Systems Analyst with 6 years of experience in Software Process Improvement and Software Testing.",
-          image: carlailane
+          image: carlailane,
         },
         {
           name: "Dra. Rossana Andrade",
           lattes: "http://lattes.cnpq.br/9576713124661835",
-          bio:
-            "Rossana holds a PhD in Computer Science from the University of Ottawa (2001), a master's degree in Computer Science from the Federal University of Paraíba (1992), and a degree in Computer Science from the State University of Ceará (1989). She has been a professor at the Federal University of Ceará, in the Computing Department, since 1994, and is currently Associate Professor IV.",
-          image: rossana
+          bio: "Rossana holds a PhD in Computer Science from the University of Ottawa (2001), a master's degree in Computer Science from the Federal University of Paraíba (1992), and a degree in Computer Science from the State University of Ceará (1989). She has been a professor at the Federal University of Ceará, in the Computing Department, since 1994, and is currently Associate Professor IV.",
+          image: rossana,
         },
         {
           name: "Dr. José Maria Monteiro",
           lattes: "http://lattes.cnpq.br/9790693300026949",
           bio: "Graduated in Bachelor of Computer Science from the Federal University of Ceará (1998), Master in Computer Science from the Federal University of Ceará (2001) and PhD in Computer Science from the Pontifical Catholic University of Rio de Janeiro - PUC-Rio (2008). Has experience in Computer Science, focusing on Database and Software Engineering.",
-          image: josemaria
-        }
-      ]
+          image: josemaria,
+        },
+      ],
     };
-  }
+  },
 };
 </script>

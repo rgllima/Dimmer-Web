@@ -3,10 +3,10 @@ import axios from "axios";
 
 const state = {
   userData: {
-    nome: "Usuário"
+    nome: "Usuário",
   },
   apiURL: `https://dymmer-web-backend.herokuapp.com`,
-  error: null
+  error: null,
 };
 
 const mutations = {
@@ -15,7 +15,7 @@ const mutations = {
   },
   setError(state, payload) {
     state.error = payload;
-  }
+  },
 };
 
 const actions = {
@@ -23,14 +23,14 @@ const actions = {
     await axios
       .post(`${state.apiURL}/users/authenticate`, {
         email: user.email,
-        password: user.password
+        password: user.password,
       })
       .then(({ data }) => {
         localStorage.setItem("@token", data["token"]);
         localStorage.setItem("@user", JSON.stringify(data["user"]));
         router.push("/home");
       })
-      .catch(err => {
+      .catch((err) => {
         context.commit("setError", err.response.data.error);
       });
   },
@@ -40,14 +40,14 @@ const actions = {
       .post(`${state.apiURL}/users/register`, {
         email: user.email,
         password: user.password,
-        name: user.name
+        name: user.name,
       })
       .then(({ data }) => {
         localStorage.setItem("@token", data["token"]);
         localStorage.setItem("@user", JSON.stringify(data["user"]));
         router.push("/home");
       })
-      .catch(err => {
+      .catch((err) => {
         context.commit("setError", err.response.data.error);
       });
   },
@@ -55,11 +55,11 @@ const actions = {
   logout: () => {
     localStorage.clear();
     router.push("/");
-  }
+  },
 };
 
 const getters = {
-  getUserData: state => state.userData
+  getUserData: (state) => state.userData,
 };
 
 export default {
@@ -67,5 +67,5 @@ export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
 };

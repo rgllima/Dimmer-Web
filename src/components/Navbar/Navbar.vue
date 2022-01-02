@@ -4,7 +4,12 @@
       <a class="navbar-item" @click="pushRouter('/')">
         <h1 class="is-size-3 has-text-white">DyMMer</h1>
       </a>
-      <div class="navbar-burger burger" data-target="navMenu" @click="showNav = !showNav" :class="{ 'is-active': showNav }">
+      <div
+        class="navbar-burger burger"
+        data-target="navMenu"
+        @click="showNav = !showNav"
+        :class="{ 'is-active': showNav }"
+      >
         <span></span>
         <span></span>
         <span></span>
@@ -19,7 +24,10 @@
         <a class="navbar-item has-text-white" @click="pushRouter('/docs')">
           Documentation
         </a>
-        <a class="navbar-item has-text-white" @click="pushRouter('/developers')">
+        <a
+          class="navbar-item has-text-white"
+          @click="pushRouter('/developers')"
+        >
           Developers
         </a>
       </div>
@@ -28,17 +36,22 @@
         <div class="navbar-item">
           <div class="field is-grouped">
             <p class="control">
-              <a class="button is-light is-outlined" @click="pushRouter('/home')">
+              <a
+                class="button is-light is-outlined"
+                @click="pushRouter('/home')"
+              >
                 <span class="icon">
                   <i class="fas fa-tachometer-alt"></i>
                 </span>
-                <span>
-                  Dashboard
-                </span>
+                <span> Dashboard </span>
               </a>
             </p>
             <p class="control">
-              <a class="button is-light is-outlined" target="_blank" href="https://github.com/dymmerufc">
+              <a
+                class="button is-light is-outlined"
+                target="_blank"
+                href="https://github.com/dymmerufc"
+              >
                 <span class="icon">
                   <i class="fab fa-github"></i>
                 </span>
@@ -56,13 +69,13 @@
 export default {
   data() {
     return {
-      showNav: false
+      showNav: false,
     };
   },
   methods: {
     pushRouter(route) {
-      this.$router.push(route)
-    }
+      this.$router.push(route);
+    },
   },
   // created() {
   //   document.addEventListener('DOMContentLoaded', () => {
@@ -94,5 +107,4 @@ export default {
 };
 </script>
 
-<style lang="css">
-</style>
+<style lang="css"></style>

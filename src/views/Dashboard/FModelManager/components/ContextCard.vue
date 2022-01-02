@@ -1,11 +1,15 @@
 <template>
   <div
-    :class="`context-card ${isActive ? 'context-card__active': ''}`"
+    :class="`context-card ${isActive ? 'context-card__active' : ''}`"
     @click="selectContext"
     :disabled="disabled"
   >
-    <div v-if="!isEditing" class="context-card-title" @dblclick="renameContext(title)">
-      <p>{{title}}</p>
+    <div
+      v-if="!isEditing"
+      class="context-card-title"
+      @dblclick="renameContext(title)"
+    >
+      <p>{{ title }}</p>
     </div>
     <div v-else class="context-card-title">
       <input
@@ -21,8 +25,15 @@
       <i class="fas fa-ellipsis-v"></i>
     </div>
     <div v-if="visibleActions" class="context-card-actions">
-      <button class="context-card-action green" @click="renameContext(title)">RENAME</button>
-      <button class="context-card-action danger" @click="showDeleteContextAlert">DELETE</button>
+      <button class="context-card-action green" @click="renameContext(title)">
+        RENAME
+      </button>
+      <button
+        class="context-card-action danger"
+        @click="showDeleteContextAlert"
+      >
+        DELETE
+      </button>
     </div>
   </div>
 </template>
@@ -32,25 +43,25 @@ export default {
   props: {
     active: { type: Boolean, default: false },
     title: String,
-    isDisabled: { type: Boolean, default: false }
+    isDisabled: { type: Boolean, default: false },
   },
   data: () => ({
     visibleActions: false,
     contextTitle: "",
-    isEditing: false
+    isEditing: false,
   }),
   mounted() {
     // console.log(this.active);
   },
 
   computed: {
-    isActive: function() {
+    isActive: function () {
       return this.active;
     },
 
-    disabled: function() {
+    disabled: function () {
       return this.isDisabled;
-    }
+    },
   },
 
   methods: {
@@ -91,7 +102,7 @@ export default {
         type: "is-danger",
         cancelText: "Cancel",
         confirmText: "Delete",
-        onConfirm: () => this.deleteContext()
+        onConfirm: () => this.deleteContext(),
       });
     },
 
@@ -105,7 +116,7 @@ export default {
       if (this.isDisabled) return;
 
       this.$emit("selectContext", this.title);
-    }
+    },
   },
 
   created() {
@@ -114,7 +125,7 @@ export default {
 
   beforeDestroy() {
     window.removeEventListener("click", this.closeActions);
-  }
+  },
 };
 </script>
 

@@ -1,5 +1,9 @@
 <template>
-  <div class="vtreeview-component" @mouseup.prevent="mousedown" @contextmenu.capture.prevent>
+  <div
+    class="vtreeview-component"
+    @mouseup.prevent="mousedown"
+    @contextmenu.capture.prevent
+  >
     <ul>
       <v-treeview-item
         ref="vtreeview"
@@ -53,12 +57,12 @@ export default {
     contextToolbox: { type: Boolean, default: false },
     editorToolbox: { type: Boolean, default: false },
     contextResolutions: Array,
-    contextInEdition: Boolean
+    contextInEdition: Boolean,
   },
   components: {
     VTreeviewItem,
     "context-toolbox": ContextToolbox,
-    "editor-toolbox": EditorToolbox
+    "editor-toolbox": EditorToolbox,
   },
   name: "v-treeview",
   data() {
@@ -73,51 +77,51 @@ export default {
           type: "#",
           max_children: 6,
           max_depth: 4,
-          valid_children: ["r", "m", "o", "g", "g0", "g1", ""]
+          valid_children: ["r", "m", "o", "g", "g0", "g1", ""],
         },
         {
           type: "r",
           name: "Root",
           icon: "fas fa-paste",
-          valid_children: ["m", "o", "g0", "g1"]
+          valid_children: ["m", "o", "g0", "g1"],
         },
         {
           type: "m",
           name: "Mandatory",
           icon: "fas fa-circle",
-          valid_children: ["m", "o", "g0", "g1"]
+          valid_children: ["m", "o", "g0", "g1"],
         },
         {
           type: "o",
           name: "Optional",
           icon: "far fa-circle",
-          valid_children: ["m", "o", "g0", "g1"]
+          valid_children: ["m", "o", "g0", "g1"],
         },
         {
           type: "",
           name: "Grouped Child",
           icon: "fas fa-stop",
-          valid_children: ["m", "o", "g0", "g1"]
+          valid_children: ["m", "o", "g0", "g1"],
         },
         {
           type: "g",
           name: "Grouped",
           icon: "fas fa-layer-group",
-          valid_children: [""]
+          valid_children: [""],
         },
         {
           type: "g0",
           name: "[1,1] Group",
           icon: "fas fa-layer-group",
-          valid_children: []
+          valid_children: [],
         },
         {
           type: "g1",
           name: "[1,*] Group",
           icon: "fas fa-layer-group",
-          valid_children: []
-        }
-      ]
+          valid_children: [],
+        },
+      ],
     };
   },
 
@@ -127,7 +131,7 @@ export default {
     },
 
     getTypeRule(type) {
-      var typeRule = this.treeRules.filter(t => t.type == type)[0];
+      var typeRule = this.treeRules.filter((t) => t.type == type)[0];
       return typeRule;
     },
 
@@ -145,12 +149,12 @@ export default {
       this.node["model"] = this.selectedNode.model;
       this.node["validChildren"] = this.getValidChildren(typeRule);
 
-
       if (this.parentNode.model) {
         this.node["parent"] = JSON.parse(JSON.stringify(this.parentNode.model));
-        this.node.parent["validChildren"] = this.getValidChildren(parentTypeRule)
+        this.node.parent["validChildren"] =
+          this.getValidChildren(parentTypeRule);
       } else {
-        this.node["parent"] = null
+        this.node["parent"] = null;
       }
     },
 
@@ -158,12 +162,12 @@ export default {
       if (!rule) return null;
 
       let items = [];
-      rule.valid_children.map(function(type, key) {
+      rule.valid_children.map(function (type, key) {
         var childType = this.getTypeRule(type);
         var item = {
           title: "Create " + childType.name,
           icon: childType.icon,
-          type: childType
+          type: childType,
         };
         items.push(item);
       }, this);
@@ -252,7 +256,7 @@ export default {
         this.mouseEvent = {
           button: e.button,
           pageX: e.layerX,
-          pageY: e.layerY
+          pageY: e.layerY,
         };
       }
     },
@@ -268,7 +272,7 @@ export default {
         this.clickedOutside = !vctxClickResult;
         // console.log(this.clickedOutside, vcontext.showContext);
       });
-    }
+    },
   },
 
   created() {
@@ -279,7 +283,7 @@ export default {
   beforeDestroy() {
     if (!this.editorToolbox) return;
     else window.removeEventListener("mousedown", this.hiddenToolbox);
-  }
+  },
 };
 </script>
 

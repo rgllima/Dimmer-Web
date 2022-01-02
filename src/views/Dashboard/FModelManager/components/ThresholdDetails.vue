@@ -5,21 +5,23 @@
       <div class="tile notification box is-vertical">
         <p class="is-size-6">
           <strong>Name:</strong>
-          {{data.name}}
+          {{ data.name }}
         </p>
         <p class="is-size-6e has-text-justified">
           <strong>Description:</strong>
-          {{data.description}}
+          {{ data.description }}
         </p>
         <p class="is-size-6e">
           <strong>Thresholds Status:</strong>
-          {{checkMeasureStatus()}}
+          {{ checkMeasureStatus() }}
         </p>
       </div>
       <div class="tile notification box">
         <div v-if="this.data.veryHigh > 0" id="chartdiv"></div>
         <div v-else class="has-text-centered threshold-details--message">
-          <h1 class="has-text-centered is-size-5">No views available for this value!</h1>
+          <h1 class="has-text-centered is-size-5">
+            No views available for this value!
+          </h1>
         </div>
       </div>
     </div>
@@ -43,7 +45,7 @@ export default {
       else if (this.data.value <= this.data.high) return "Moderate";
       else if (this.data.value <= this.data.veryHigh) return "High";
       else return "Very High";
-    }
+    },
   },
 
   mounted() {
@@ -78,7 +80,7 @@ export default {
     axis.renderer.ticks.template.length = 10;
     axis.renderer.grid.template.disabled = true;
     axis.renderer.labels.template.radius = 40;
-    axis.renderer.labels.template.adapter.add("text", function(text) {
+    axis.renderer.labels.template.adapter.add("text", function (text) {
       return text + "%";
     });
 
@@ -149,12 +151,12 @@ export default {
     hand.pin.disabled = true;
     hand.value = this.data.value;
 
-    hand.events.on("propertychanged", function(ev) {
+    hand.events.on("propertychanged", function (ev) {
       //   veryLow.endValue = ev.target.value
       //   low.value = ev.target.value;
       axis2.invalidate();
     });
-  }
+  },
 };
 </script>
 
@@ -176,4 +178,3 @@ export default {
   width: 100%
   height: 300px
 </style>
-
