@@ -9,8 +9,8 @@ import LoginCard from "./LoginCard";
 
 export default {
   components: {
-    LoginCard
-  }
+    LoginCard,
+  },
 };
 </script>
 

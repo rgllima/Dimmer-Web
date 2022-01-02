@@ -13,12 +13,16 @@
           </figure>
         </div>
         <div class="media-content">
-          <p class="is-size-5 is-4 pointer" @click="openPage(lattes)">{{name}}</p>
-          <p class="subtitle is-6 pointer" @click="openPage(lattes)">Currículo Lattes</p>
+          <p class="is-size-5 is-4 pointer" @click="openPage(lattes)">
+            {{ name }}
+          </p>
+          <p class="subtitle is-6 pointer" @click="openPage(lattes)">
+            Currículo Lattes
+          </p>
         </div>
       </div>
 
-      <div class="content has-text-justified">{{bio}}</div>
+      <div class="content has-text-justified">{{ bio }}</div>
 
       <div class="content">
         <!-- <p class="pointer" v-if="linkedin" @click="openPage(`https://linkedin.com/in/${linkedin}`)">
@@ -36,8 +40,8 @@ export default {
   methods: {
     openPage(link) {
       window.open(link, "_blank");
-    }
-  }
+    },
+  },
 };
 </script>
 

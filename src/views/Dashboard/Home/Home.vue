@@ -111,21 +111,17 @@
       <div class="tile is-parent">
         <div class="tile is-child notification box">
           <p>
-            <strong>Figure 1</strong> illustrates the DyMMer-web architecture, which is based on
-            the Client-Server architectural pattern. The server module was
-            developed in JavaScript using the
+            <strong>Figure 1</strong> illustrates the DyMMer-web architecture,
+            which is based on the Client-Server architectural pattern. The
+            server module was developed in JavaScript using the
             <a href="https://nodejs.org/en/" target="_blank">
               NodeJs framework</a
             >
             and the Rest API model for web services. The server is hosted in a
-            <a href="https://www.heroku.com/" target="_blank">
-              Heroku
-            </a>
+            <a href="https://www.heroku.com/" target="_blank"> Heroku </a>
             and uses a non-relational database (noSQL), document oriented and
             cross platform,
-            <a href="https://www.mongodb.com/" target="_blank">
-              MongoDB </a
-          >.
+            <a href="https://www.mongodb.com/" target="_blank"> MongoDB </a>.
           </p>
 
           <p>
@@ -176,7 +172,7 @@ export default {
     ...mapGetters({
       splList: "featureModelDatabase/getSplList",
       dsplList: "featureModelDatabase/getDsplList",
-      measureDatabase: "qualityMeasures/getMeasures"
+      measureDatabase: "qualityMeasures/getMeasures",
     }),
 
     splFModels() {
@@ -189,15 +185,15 @@ export default {
 
     measures() {
       return this.measureDatabase.length;
-    }
+    },
   },
 
   methods: {
     loading() {
       this.loadingComponent = this.$loading.open({
-        container: this.$refs.element
+        container: this.$refs.element,
       });
-    }
+    },
   },
 
   mounted() {
@@ -205,7 +201,7 @@ export default {
       "featureModelDatabase/fetchAllFeatureModelsOnDatabase"
     );
     this.$store.dispatch("qualityMeasures/fetchMeasuresOnDatabase");
-  }
+  },
 };
 </script>
 

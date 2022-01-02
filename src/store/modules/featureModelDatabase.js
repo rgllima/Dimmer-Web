@@ -6,7 +6,7 @@ const state = {
   privateList: [],
   isUpdate: false,
   error: null,
-  loading: false
+  loading: false,
 };
 
 const mutations = {
@@ -27,11 +27,11 @@ const mutations = {
   },
   setLoading(state, payload) {
     state.loading = payload;
-  }
+  },
 };
 
 const actions = {
-  fetchAllFeatureModelsOnDatabase: async context => {
+  fetchAllFeatureModelsOnDatabase: async (context) => {
     if (state.isUpdate) return;
     context.commit("setLoading", true);
 
@@ -39,9 +39,9 @@ const actions = {
 
     await instance
       .get(url)
-      .then(response => {
+      .then((response) => {
         let ftm = [];
-        response.data.featureModelList.map(featureModel => {
+        response.data.featureModelList.map((featureModel) => {
           let fmodel = JSON.parse(featureModel.featureModelJson);
           fmodel["_id"] = featureModel._id;
           fmodel["allowEdit"] = featureModel.allowEdit;
@@ -50,18 +50,18 @@ const actions = {
           ftm.push(fmodel);
         });
 
-        let splList = ftm.filter(fmodel => fmodel.type === "SPL");
-        let dsplList = ftm.filter(fmodel => fmodel.type === "DSPL");
+        let splList = ftm.filter((fmodel) => fmodel.type === "SPL");
+        let dsplList = ftm.filter((fmodel) => fmodel.type === "DSPL");
 
         context.commit("setSplList", splList);
         context.commit("setDsplList", dsplList);
         context.commit("setIsUpdate", true);
         context.commit("setLoading", false);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   },
 
-  fetchPrivateFeatureModelsOnDatabase: async context => {
+  fetchPrivateFeatureModelsOnDatabase: async (context) => {
     if (state.isUpdate) return;
     context.commit("setLoading", true);
 
@@ -69,10 +69,10 @@ const actions = {
 
     await instance
       .get(url)
-      .then(response => {
+      .then((response) => {
         let ftm = [];
 
-        response.data.returnedFeatureModel.map(featureModel => {
+        response.data.returnedFeatureModel.map((featureModel) => {
           let fmodel = JSON.parse(featureModel.featureModelJson);
           fmodel["_id"] = featureModel._id;
           fmodel["allowEdit"] = featureModel.allowEdit;
@@ -85,15 +85,15 @@ const actions = {
         context.commit("setIsUpdate", true);
         context.commit("setLoading", false);
       })
-      .catch(err => console.log(err));
-  }
+      .catch((err) => console.log(err));
+  },
 };
 
 const getters = {
-  getSplList: state => state.splList,
-  getDsplList: state => state.dsplList,
-  getPrivateList: state => state.privateList,
-  getLoading: state => state.loading
+  getSplList: (state) => state.splList,
+  getDsplList: (state) => state.dsplList,
+  getPrivateList: (state) => state.privateList,
+  getLoading: (state) => state.loading,
 };
 
 export default {
@@ -101,5 +101,5 @@ export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
 };

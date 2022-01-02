@@ -47,12 +47,12 @@ import CreateFeatureModel from "./CreateFeatureModalForm";
 
 export default {
   components: {
-    Lottie
+    Lottie,
   },
 
   data: () => ({
     isLoading: false,
-    defaultOptions: { animationData: animationData.default }
+    defaultOptions: { animationData: animationData.default },
   }),
 
   methods: {
@@ -61,8 +61,11 @@ export default {
       const file = ev.target.files[0];
       const reader = new FileReader();
 
-      reader.onload = async e => {
-        await this.$store.dispatch("featureModel/convertXmlToJson", e.target.result);
+      reader.onload = async (e) => {
+        await this.$store.dispatch(
+          "featureModel/convertXmlToJson",
+          e.target.result
+        );
         this.$emit("close");
       };
       reader.readAsText(file);
@@ -72,14 +75,13 @@ export default {
       this.$modal.open({
         parent: this,
         component: CreateFeatureModel,
-        hasModalCard: true
+        hasModalCard: true,
       });
       this.$emit("close");
-    }
-  }
+    },
+  },
 };
 </script>
-
 
 <style lang="sass" scoped>
 .card

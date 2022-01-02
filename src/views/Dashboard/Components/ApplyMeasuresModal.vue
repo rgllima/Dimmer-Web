@@ -12,20 +12,28 @@
             <!-- <div class="field">
               <b-checkbox>Select All</b-checkbox>
             </div> -->
-            <div class="field" v-for="(measure, index) in measures" :key="index">
+            <div
+              class="field"
+              v-for="(measure, index) in measures"
+              :key="index"
+            >
               <b-checkbox
                 :id="`checkbox-${measure._id}`"
                 :native-value="measure"
                 v-model="checkedMeasures"
               >
-                <b-tooltip :label="measure.description" dashed>{{ `${measure.initials} - ${measure.name}` }}</b-tooltip>
+                <b-tooltip :label="measure.description" dashed>{{
+                  `${measure.initials} - ${measure.name}`
+                }}</b-tooltip>
               </b-checkbox>
             </div>
           </div>
         </div>
         <footer class="card-footer">
           <a href="#" class="card-footer-item">Cancel</a>
-          <a href="#" class="card-footer-item" @click="applyMeasures">Apply Measures</a>
+          <a href="#" class="card-footer-item" @click="applyMeasures"
+            >Apply Measures</a
+          >
         </footer>
       </div>
     </template>
@@ -42,15 +50,15 @@ export default {
       checkedMeasures: [],
       checkbox: false,
       checkboxCustom: "Yes",
-      switchInput: false
+      switchInput: false,
     };
   },
 
   computed: {
     ...mapGetters({
       measures: "qualityMeasures/getMeasuresModel",
-      featureTree: "featureModel/getFeatureModel"
-    })
+      featureTree: "featureModel/getFeatureModel",
+    }),
   },
 
   methods: {
@@ -59,7 +67,10 @@ export default {
       obj["measures"] = this.checkedMeasures;
       obj["featureTree"] = this.featureTree._id;
 
-      await this.$store.dispatch("qualityMeasures/calculateSelectedMeasures", obj);
+      await this.$store.dispatch(
+        "qualityMeasures/calculateSelectedMeasures",
+        obj
+      );
       await this.$store.dispatch("valeThresholds/fetchValeThresholds");
       this.$router.push("/measures-shower");
       this.$emit("close");
@@ -72,17 +83,17 @@ export default {
         if (value) obj.setAttribute("checked", value);
         else obj.removeAttribute("checked");
       }
-    }
+    },
   },
 
   mounted() {
     this.$store.dispatch("qualityMeasures/fetchMeasuresOnDatabase");
     // console.log(this.$refs, this.measures, this.featureTree.feature_tree[0]);
-  }
+  },
 };
 </script>
 
-<style lang="sass" >
+<style lang="sass">
 .animation-content
   overflow: scroll
 #apply-measures-modal

@@ -19,10 +19,17 @@
         </div>
         <div class="field is-grouped">
           <div class="control" style="width: 50%; margin: 0">
-            <button class="button is-danger is-link is-inverted" @click="modalActive=false">Cancel</button>
+            <button
+              class="button is-danger is-link is-inverted"
+              @click="modalActive = false"
+            >
+              Cancel
+            </button>
           </div>
-          <div class="control" style="width: 50%;margin: 0; text-align: right">
-            <button class="button is-success is-inverted" @click="addContext">Create</button>
+          <div class="control" style="width: 50%; margin: 0; text-align: right">
+            <button class="button is-success is-inverted" @click="addContext">
+              Create
+            </button>
           </div>
         </div>
       </div>
@@ -37,7 +44,7 @@
             <div style="margin-bottom: 15px">
               <button
                 class="button is-small create-ctx-btn"
-                @click="modalActive=true"
+                @click="modalActive = true"
                 :disabled="contextInEdition"
               >
                 <i class="icon fas fa-plus"></i> Create New Context
@@ -47,14 +54,22 @@
                 class="button is-small is-warning edit-ctx-btn"
                 @click="editContext"
                 :disabled="contextResolutions.length === 0"
-              >Edit Selected Context</button>
+              >
+                Edit Selected Context
+              </button>
               <button
                 v-else
                 class="button is-small is-warning edit-ctx-btn pulse"
                 @click="saveContext"
-              >Validate and Save Context</button>
+              >
+                Validate and Save Context
+              </button>
             </div>
-            <div class="context-manager--card" v-for="(context, index) in contexts" :key="index">
+            <div
+              class="context-manager--card"
+              v-for="(context, index) in contexts"
+              :key="index"
+            >
               <card-context
                 :title="context['name']"
                 :active="context['isTheCurrent']"
@@ -72,7 +87,10 @@
         </aside>
       </div>
       <div class="tile is-parent">
-        <div v-if="contexts.length !== 0" class="tile is-child context-manager--scroll-box box">
+        <div
+          v-if="contexts.length !== 0"
+          class="tile is-child context-manager--scroll-box box"
+        >
           <div class="field is-grouped">
             <div class="control" style="width: 55%; min-width: 150px">
               <p class="has-text-right subtitle">Context View</p>
@@ -92,14 +110,26 @@
 
           <div
             v-else
-            style="display: flex; align-items: center; height: 70%; justify-content: center;"
+            style="
+              display: flex;
+              align-items: center;
+              height: 70%;
+              justify-content: center;
+            "
           >
-            <p class="has-text-centered">Select an available context in the left box!</p>
+            <p class="has-text-centered">
+              Select an available context in the left box!
+            </p>
           </div>
         </div>
 
         <div v-else class="tile is-child context-manager--empty-context box">
-          <button class="context-manager--button button" @click="modalActive=true">Add Context</button>
+          <button
+            class="context-manager--button button"
+            @click="modalActive = true"
+          >
+            Add Context
+          </button>
         </div>
       </div>
     </div>
@@ -112,7 +142,7 @@ import CardContext from "./components/ContextCard";
 
 export default {
   components: {
-    "card-context": CardContext
+    "card-context": CardContext,
   },
 
   data: () => ({
@@ -120,24 +150,24 @@ export default {
     openAll: true,
     contextName: "",
     contextInEdition: false,
-    contextResolutions: []
+    contextResolutions: [],
   }),
 
   watch: {
     contexts: {
-      handler: function() {
-        let context = this.contexts.filter(context => context.isTheCurrent);
+      handler: function () {
+        let context = this.contexts.filter((context) => context.isTheCurrent);
         this.contextResolutions = context[0] ? context[0].resolutions : [];
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
 
   computed: {
     ...mapGetters({
       contexts: "featureModel/getFeatureModelContext",
-      featureModel: "featureModel/getFeatureModel"
-    })
+      featureModel: "featureModel/getFeatureModel",
+    }),
   },
 
   methods: {
@@ -152,7 +182,7 @@ export default {
 
     changeSelectedContext(name) {
       this.contextResolutions = this.contexts.filter(
-        context => context.name === name
+        (context) => context.name === name
       )[0].resolutions;
     },
 
@@ -193,7 +223,7 @@ export default {
           resolutions.push({
             feature_id: `${child.id}`,
             feature_name: `${child.name}`,
-            status: true
+            status: true,
           });
         }
 
@@ -212,9 +242,9 @@ export default {
     showMessage(message, color) {
       this.$toast.open({
         message: message,
-        type: color
+        type: color,
       });
-    }
+    },
   },
 };
 </script>

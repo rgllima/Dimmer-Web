@@ -5,7 +5,7 @@ const state = {
   valeThresholds: [],
   computedMeasures: [],
   groupedMeasuresThresholds: [],
-  isUpdate: false
+  isUpdate: false,
 };
 
 const mutations = {
@@ -21,26 +21,26 @@ const mutations = {
   setGroupedMeasuresThresholds: (state, payload) => {
     state.groupedMeasuresThresholds = payload;
   },
-  resetGroupedMeasuresThresholds: state => {
+  resetGroupedMeasuresThresholds: (state) => {
     state.groupedMeasuresThresholds = [];
   },
   setIsUpdate(state, payload) {
     state.isUpdate = payload;
-  }
+  },
 };
 
 const actions = {
-  fetchMeasuresOnDatabase: async context => {
+  fetchMeasuresOnDatabase: async (context) => {
     if (state.isUpdate) return;
 
     let url = `/qualitymeasures/list`;
     await instance
       .get(url)
-      .then(response => {
+      .then((response) => {
         context.commit("setMeasures", response.data.qualityMeasureList);
         context.commit("setIsUpdate", true);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   },
 
   applyMeasures: async (context, data) => {
@@ -51,8 +51,8 @@ const actions = {
     let valeThresholds = state.valeThresholds;
 
     let groupedMeasuresThresholds = [];
-    measures.forEach(element => {
-      let thresholds = valeThresholds.thresholds.filter(measure => {
+    measures.forEach((element) => {
+      let thresholds = valeThresholds.thresholds.filter((measure) => {
         return element._id === measure.qualityMeasure._id;
       })[0];
       let a = {};
@@ -74,28 +74,28 @@ const actions = {
       url: url,
       data: {
         measures: obj.measures,
-        featureModel: obj.featureModel
-      }
+        featureModel: obj.featureModel,
+      },
     })
-      .then(response => {
+      .then((response) => {
         let data = response.data.appliedQualityMeasuresList;
         context.commit("setComputedMeasures", data);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   },
 
   async fetchValeThresholds(context) {
     let url = `/valemethod/thresholds`;
     await instance
       .get(url)
-      .then(response => {
+      .then((response) => {
         let data = response.data.returnedValeThresholds;
         context.commit("setValeThresholds", data);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   },
 
-  exportMeasuresToCSV: async context => {
+  exportMeasuresToCSV: async (context) => {
     let url = `/qualitymeasures/export-to-csv`;
     const descriptionData = [
       "initials",
@@ -105,9 +105,9 @@ const actions = {
       "threshold_low",
       "threshold_moderate",
       "threshold_high",
-      "threshold_very_high"
+      "threshold_very_high",
     ];
-    const data = state.groupedMeasuresThresholds.map(obj => [
+    const data = state.groupedMeasuresThresholds.map((obj) => [
       obj["initials"],
       obj["name"],
       obj["value"],
@@ -115,16 +115,16 @@ const actions = {
       obj["low"],
       obj["moderate"],
       obj["high"],
-      obj["veryHigh"]
+      obj["veryHigh"],
     ]);
     const fModel = context.rootGetters["featureModel/getFeatureModel"];
 
     await instance
       .post(url, {
         dataDescription: descriptionData,
-        data: data
+        data: data,
       })
-      .then(res => {
+      .then((res) => {
         let blob = new Blob([res.data], { type: "text/csv" });
         let url = window.URL.createObjectURL(blob);
         const link = document.createElement("a");
@@ -138,7 +138,7 @@ const actions = {
       });
   },
 
-  exportMeasuresToPDF: async context => {
+  exportMeasuresToPDF: async (context) => {
     let url = `/qualitymeasures/export-to-pdf`;
     const descriptionData = [
       "initials",
@@ -148,9 +148,9 @@ const actions = {
       "threshold_low",
       "threshold_moderate",
       "threshold_high",
-      "threshold_very_high"
+      "threshold_very_high",
     ];
-    const data = state.groupedMeasuresThresholds.map(obj => [
+    const data = state.groupedMeasuresThresholds.map((obj) => [
       obj["initials"],
       obj["name"],
       obj["value"],
@@ -158,16 +158,16 @@ const actions = {
       obj["low"],
       obj["moderate"],
       obj["high"],
-      obj["veryHigh"]
+      obj["veryHigh"],
     ]);
     const fModel = context.rootGetters["featureModel/getFeatureModel"];
 
     await instance
       .post(url, {
         dataDescription: descriptionData,
-        data: data
+        data: data,
       })
-      .then(res => {
+      .then((res) => {
         let blob = new Blob([res.data], { type: "application/pdf" });
         let url = window.URL.createObjectURL(blob);
         const link = document.createElement("a");
@@ -179,12 +179,12 @@ const actions = {
         document.body.appendChild(link);
         link.click();
       });
-  }
+  },
 };
 
 const getters = {
-  getMeasures: state => state.measures,
-  getGroupedMeasuresThresholds: state => state.groupedMeasuresThresholds
+  getMeasures: (state) => state.measures,
+  getGroupedMeasuresThresholds: (state) => state.groupedMeasuresThresholds,
 };
 
 export default {
@@ -192,5 +192,5 @@ export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
 };

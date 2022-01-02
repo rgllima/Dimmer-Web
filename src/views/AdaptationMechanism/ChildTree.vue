@@ -27,7 +27,7 @@
 
       <div
         class="dependencies"
-        v-for="state in feature.states.filter(e => e.name === 'On')"
+        v-for="state in feature.states.filter((e) => e.name === 'On')"
         :key="state.name"
       >
         <div v-if="state.requires.length">
@@ -77,7 +77,7 @@ export default {
     tree: Array,
     level: Number,
     simulating: Boolean,
-    dictionary: Object
+    dictionary: Object,
   },
   methods: {
     linkAgent(featureId) {
@@ -121,8 +121,8 @@ export default {
       }
 
       return separator;
-    }
-  }
+    },
+  },
 };
 </script>
 

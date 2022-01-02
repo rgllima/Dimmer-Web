@@ -24,7 +24,7 @@
             Cancel
           </button>
         </div>
-        <div class="control" style="width: 50%;margin: 0; text-align: right">
+        <div class="control" style="width: 50%; margin: 0; text-align: right">
           <button class="button is-success is-inverted" @click="action">
             Create
           </button>
@@ -39,12 +39,12 @@ export default {
   name: "InputModal",
 
   props: {
-    active: Boolean
+    active: Boolean,
   },
 
   data() {
     return {
-      name: ""
+      name: "",
     };
   },
 
@@ -53,8 +53,8 @@ export default {
       this.$emit("action", this.name);
       this.$emit("close");
       this.name = "";
-    }
-  }
+    },
+  },
 };
 </script>
 

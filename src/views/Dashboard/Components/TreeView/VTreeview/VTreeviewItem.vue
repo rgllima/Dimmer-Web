@@ -9,7 +9,7 @@
         v-if="isFolder"
         :class="{
           'fas fa-caret-down': this.open,
-          'fas fa-caret-right': !this.open
+          'fas fa-caret-right': !this.open,
         }"
       ></i>
     </span>
@@ -79,7 +79,7 @@
           :father="{
             id: model.id,
             type: model.type,
-            multiplicity: model.multiplicity
+            multiplicity: model.multiplicity,
           }"
           :treeRules="treeRules"
           :openAll="openAll"
@@ -105,7 +105,7 @@ export default {
     "treeRules",
     "openAll",
     "searchText",
-    "contextResolutions"
+    "contextResolutions",
   ],
   data() {
     return {
@@ -114,7 +114,7 @@ export default {
       checked: null,
       edit: false,
       model: null,
-      modelName: ""
+      modelName: "",
     };
   },
   computed: {
@@ -145,35 +145,35 @@ export default {
         return "";
       if (this.model.id === "_r") return "";
       let context = this.contextResolutions.filter(
-        resolution => resolution.feature_id === this.model.id
+        (resolution) => resolution.feature_id === this.model.id
       )[0];
 
       if (context)
         if (context.status) return "activeItem";
         else return "desactiveItem";
       return "ignoredItem";
-    }
+    },
   },
   methods: {
     getTypeRule(type) {
-      var typeRule = this.treeRules.filter(t => t.type == type)[0];
+      var typeRule = this.treeRules.filter((t) => t.type == type)[0];
       return typeRule;
     },
 
     blur(e) {
-      if (!this.model.name.trim())this.model.name = this.modelName;
+      if (!this.model.name.trim()) this.model.name = this.modelName;
 
       this.edit = false;
 
       if (!this.model.id)
         this.$emit("emitAddNode", {
           parent: this.$parent.model,
-          node: this.model
+          node: this.model,
         });
       else
         this.$emit("emitEditName", {
           id: this.model.id,
-          name: this.model.name
+          name: this.model.name,
         });
     },
 
@@ -218,7 +218,7 @@ export default {
         this.open = !this.open;
       }
       this.selected(this);
-    }
+    },
   },
 
   created() {
@@ -238,8 +238,8 @@ export default {
 
     openAll(openAll) {
       this.open = openAll;
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -3,30 +3,37 @@
     <section id="dymmer-header">
       <div class="container">
         <header>
-          <navbar/>
+          <navbar />
         </header>
         <div id="content" class="tile is-ancestor">
           <div class="tile is-parent">
             <div class="tile is-child">
               <h2 id="mytitle" class="title has-text-white">
-                <b-tooltip label="Dynamic feature Model tool based on Measures" dashed>DyMMer-web</b-tooltip> is a tool for modeling and evaluating SPLs and DSPLs feature models.
+                <b-tooltip
+                  label="Dynamic feature Model tool based on Measures"
+                  dashed
+                  >DyMMer-web</b-tooltip
+                >
+                is a tool for modeling and evaluating SPLs and DSPLs feature
+                models.
               </h2>
-              <p
-              <p id="mysubtitle" class="subtitle has-text-light">
+              <p <p id="mysubtitle" class="subtitle has-text-light">
                 The tool collects a large number of quality measures to support
                 the maintainability evaluation of the features model, 40
                 measurements in total, uses specific measures for DSPL feature
                 models.
               </p>
               <div class="buttons">
-                <a class="button is-success" @click="openDashboard">GET STARTED</a>
+                <a class="button is-success" @click="openDashboard"
+                  >GET STARTED</a
+                >
               </div>
             </div>
           </div>
           <div class="tile is-parent">
             <div class="tile is-child">
               <div id="animation">
-                <lottie id="my-lottie" :options="engeneerAnimation"/>
+                <lottie id="my-lottie" :options="engeneerAnimation" />
               </div>
             </div>
           </div>
@@ -43,33 +50,38 @@
           </p>
         </div>
         <div id="dashboard-image">
-          <img src="../../assets/dashboard.png" alt="dashboard">
+          <img src="../../assets/dashboard.png" alt="dashboard" />
         </div>
       </div>
     </section>
 
     <section id="dymmer-docs">
       <div class="container">
-        <div class="tile is-ancestor" style="margin-top: 50px;">
+        <div class="tile is-ancestor" style="margin-top: 50px">
           <div class="tile is-parent">
             <div class="tile is-child">
               <div class="tile is-child">
                 <div class="image">
-                  <img src="../../assets/clip-programming.png" alt="clip-programming">
+                  <img
+                    src="../../assets/clip-programming.png"
+                    alt="clip-programming"
+                  />
                 </div>
               </div>
             </div>
           </div>
           <div class="tile is-parent">
             <div class="tile is-child">
-              <h2
-                  id="mytitle"
-                  class="title has-text-white"
-              >Export the values of the quality measures and analyze several feature models together.</h2>
-              <p
-                  id="mysubtitle"
-                  class="subtitle has-text-light"
-              >This is a great advantage of the DyMMer tool, since it makes it possible to analyze several feature models together. DyMMer also allows the domain engineer to export only a subset of the 40 quality measures supported..</p>
+              <h2 id="mytitle" class="title has-text-white">
+                Export the values of the quality measures and analyze several
+                feature models together.
+              </h2>
+              <p id="mysubtitle" class="subtitle has-text-light">
+                This is a great advantage of the DyMMer tool, since it makes it
+                possible to analyze several feature models together. DyMMer also
+                allows the domain engineer to export only a subset of the 40
+                quality measures supported..
+              </p>
               <a class="button is-light is-outlined">
                 <span>Learn more</span>
                 <span class="icon is-small">
@@ -91,14 +103,18 @@
                 <div class="field">
                   <label class="label">Name</label>
                   <div class="control">
-                    <input class="input" type="text" placeholder="Text input">
+                    <input class="input" type="text" placeholder="Text input" />
                   </div>
                 </div>
 
                 <div class="field">
                   <label class="label">Email</label>
                   <div class="control has-icons-left has-icons-right">
-                    <input class="input" type="email" placeholder="Email input">
+                    <input
+                      class="input"
+                      type="email"
+                      placeholder="Email input"
+                    />
                     <span class="icon is-small is-left">
                       <i class="fas fa-envelope"></i>
                     </span>
@@ -108,7 +124,10 @@
                 <div class="field">
                   <label class="label">Message</label>
                   <div class="control">
-                    <textarea class="textarea" placeholder="Textarea"></textarea>
+                    <textarea
+                      class="textarea"
+                      placeholder="Textarea"
+                    ></textarea>
                   </div>
                 </div>
 
@@ -123,7 +142,10 @@
           <div class="tile is-parent">
             <div class="tile is-child">
               <div class="image">
-                <img src="../../assets/hugo-message-sent.png" alt="hugo-message-sent">
+                <img
+                  src="../../assets/hugo-message-sent.png"
+                  alt="hugo-message-sent"
+                />
               </div>
             </div>
           </div>
@@ -131,7 +153,7 @@
       </div>
     </section>
     <section>
-      <futer/>
+      <futer />
     </section>
   </div>
 </template>
@@ -147,18 +169,18 @@ export default {
   components: {
     lottie: Lottie,
     Navbar,
-    futer: Footer
+    futer: Footer,
   },
   data() {
     return {
-      engeneerAnimation: { animationData: engeneer.default }
+      engeneerAnimation: { animationData: engeneer.default },
     };
   },
   methods: {
     openDashboard() {
       this.$router.push("/home");
-    }
-  }
+    },
+  },
 };
 </script>
 

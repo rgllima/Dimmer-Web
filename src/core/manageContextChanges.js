@@ -64,7 +64,7 @@ function analyseGroupedFeatures(feature, father, context) {
   // let ft_type_boolean = typeof feature.status === "boolean" ? true : false;
   let multiplicity = feature.father.multiplicity;
 
-  father.children.map(child => {
+  father.children.map((child) => {
     if (child.id !== feature.id) {
       let ftExists = checkIfFeatureExistsInTheContext(child, context);
 
@@ -95,7 +95,7 @@ function analyseGroupedFeatures(feature, father, context) {
 function analyseOptionalFeatures(feature, father, context) {
   let response = [];
   let child_feature = father.children.filter(
-    father_child => father_child.id === feature.id
+    (father_child) => father_child.id === feature.id
   )[0];
 
   if (child_feature) {
@@ -118,7 +118,7 @@ function analyseOptionalFeatures(feature, father, context) {
  */
 function verifyHierarchyIsChecked(feature, ancestral, context) {
   let isChecked = context.resolutions.filter(
-    child => child.feature_id === ancestral.id
+    (child) => child.feature_id === ancestral.id
   )[0];
 
   if (typeof isChecked === "undefined") return false;
@@ -174,7 +174,7 @@ function searchCurrentContext(contexts) {
  */
 function changeChildStatusToFalse(father, context) {
   let response = [];
-  father.children.map(child => {
+  father.children.map((child) => {
     let ftExists = checkIfFeatureExistsInTheContext(child, context);
 
     if (child.type !== "g" && ftExists)
@@ -190,7 +190,7 @@ function changeChildStatusToFalse(father, context) {
  */
 function changeMandatoryFeatureToTrue(father) {
   let response = [];
-  father.children.map(child => {
+  father.children.map((child) => {
     if (child.type === "m") {
       response.push({ id: child.id, status: true });
       response = response.concat(changeMandatoryFeatureToTrue(child));
@@ -200,7 +200,7 @@ function changeMandatoryFeatureToTrue(father) {
 }
 
 function checkIfFeatureExistsInTheContext(feature, context) {
-  return context.resolutions.filter(ftr => ftr.feature_id === feature.id)[0];
+  return context.resolutions.filter((ftr) => ftr.feature_id === feature.id)[0];
 }
 
 export { runContextAnalysis };

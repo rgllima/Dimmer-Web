@@ -1,13 +1,13 @@
 <template>
   <div class="dashboard-content columns">
-    <aside class="sidebar column is-paddingless" :class="{'active': menu_bars}">
+    <aside class="sidebar column is-paddingless" :class="{ active: menu_bars }">
       <div class="dashboard-content--sidebar">
         <div class="infobar">
           <h1 class="infobar-text has-text-centered is-size-5">DyMMer Web</h1>
         </div>
 
-        <div class="menu-bars" @click="menu_bars=!menu_bars">
-          <i class="fa" :class="(!menu_bars) ? 'fa-bars' : 'fa-times'" />
+        <div class="menu-bars" @click="menu_bars = !menu_bars">
+          <i class="fa" :class="!menu_bars ? 'fa-bars' : 'fa-times'" />
         </div>
 
         <div style="margin-top: 20px">
@@ -29,13 +29,21 @@
               </a>
             </li>
             <li>
-              <a class="has-text-white" @click="pushRouter('/feature-model-list',{access:'public'})">
+              <a
+                class="has-text-white"
+                @click="pushRouter('/feature-model-list', { access: 'public' })"
+              >
                 <i class="fas fa-table"></i>
                 Public Repository
               </a>
             </li>
             <li>
-              <a class="has-text-white" @click="pushRouter('/feature-model-list', {access:'private'})">
+              <a
+                class="has-text-white"
+                @click="
+                  pushRouter('/feature-model-list', { access: 'private' })
+                "
+              >
                 <i class="fas fa-database"></i>
                 Private Repository
               </a>
@@ -45,7 +53,10 @@
           <p class="menu-label has-text-light">General</p>
           <ul class="menu-list">
             <li>
-              <a class="has-text-white" @click="pushRouter('/measures-dataset')">
+              <a
+                class="has-text-white"
+                @click="pushRouter('/measures-dataset')"
+              >
                 <i class="fas fa-database"></i>
                 Measures Dataset
               </a>
@@ -85,7 +96,7 @@ import FeatureModelModal from "./Components/AddFeatureModelModal";
 export default {
   data() {
     return {
-      menu_bars: false
+      menu_bars: false,
     };
   },
   methods: {
@@ -98,14 +109,14 @@ export default {
       this.$modal.open({
         parent: this,
         component: FeatureModelModal,
-        hasModalCard: true
+        hasModalCard: true,
       });
     },
 
     logout() {
       this.$store.dispatch("authentication/logout");
-    }
-  }
+    },
+  },
 };
 </script>
 
