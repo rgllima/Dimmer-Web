@@ -138,36 +138,36 @@ const getters = {
     const { feature, comparator } = improvementSuggestion;
     const tips = {
       NF: {
-        ">": "Increase the number of features (hint: divide very broad features into smaller features)",
-        "<=": "Decrease the number of features (hint: add very small features into larger features)",
+        ">": "Increase the number of features",
+        "<=": "Decrease the number of features",
       },
       NM: {
-        ">": "Increase the number of mandatory features (hint: check if there are any optional features that should be mandatory)",
-        "<=": "Decrease the number of mandatory features (hint: check if there are any mandatory features that should be optional)",
+        ">": "Increase the number of mandatory features",
+        "<=": "Decrease the number of mandatory features",
       },
       NTop: {
-        ">": "Restructure the feature model so that the number of features that descend directly from the root of the tree increases",
-        "<=": "Restructure the feature model so that the number of features that descend directly from the root of the tree decreases",
+        ">": "Increase the number of features that descend directly from the root of the tree",
+        "<=": "Decrease the number of features that descend directly from the root of the tree",
       },
       NLeaf: {
-        ">": "Restructure the feature model so that the number of features in the last level of the tree increases",
-        "<=": "Restructure the feature model so that the number of features in the last level of the tree decreases",
+        ">": "Increase the number of features in the last level of the tree",
+        "<=": "Decrease the number of features in the last level of the tree",
       },
       DTMax: {
-        ">": "Restructure the feature model so that the number of levels in the tree increases",
-        "<=": "Restructure the feature model so that the number of levels in the tree decreases",
+        ">": "Increase the number of levels in the tree",
+        "<=": "Decrease the number of levels in the tree",
       },
       CogC: {
         ">": "Increase the number of Or or XOr type groupings",
         "<=": "Decrease the number of Or or XOr type groupings",
       },
       FoC: {
-        ">": "Increase the number of optional features (hint: check if there are any mandatory features that should be optional) or decrease the number of features (hint: add very small features into larger features)",
-        "<=": "Decrease the number of optional features (hint: check if there are any optional features that should be mandatory) or increase the number of features (hint: divide very comprehensive features into smaller features)",
+        ">": "Increase the number of optional features or decrease the number of features",
+        "<=": "Decrease the number of optional features or increase the number of features",
       },
       SCDF: {
-        ">": "Restructure the feature model so that the number of features that are children of XOr type groupings increases",
-        "<=": "Restructure the feature model so that the number of features that are children of groupings of type XOr decreases",
+        ">": "Increase the number of features that are children of XOr type groupings",
+        "<=": "Decrease the number of features that are children of groupings of type XOr",
       },
       RDen: {
         ">": "Increase the number of features referenced in constraints",
@@ -176,6 +176,53 @@ const getters = {
     };
 
     return tips[feature][comparator];
+  },
+  refactoringSuggestions: (state) => {
+    const { improvementSuggestion } = state;
+
+    if (!improvementSuggestion) return [];
+
+    const { feature, comparator } = improvementSuggestion;
+    const refactorings = {
+      NF: {
+        ">": [1, 2],
+        "<=": [3, 4, 5],
+      },
+      NM: {
+        ">": [5, 6, 7, 8, 9, 10],
+        "<=": [11, 12, 13],
+      },
+      NTop: {
+        ">": [14, 15, 16, 17, 18, 19],
+        "<=": [20, 21, 22, 23, 24, 25],
+      },
+      NLeaf: {
+        ">": [1, 2, 32, 33, 34],
+        "<=": [26, 27, 28, 29, 30, 31],
+      },
+      DTMax: {
+        ">": [35, 36, 37, 38, 39, 40],
+        "<=": [41, 42, 43, 44, 45, 46],
+      },
+      CogC: {
+        ">": [47, 48],
+        "<=": [5, 49, 50, 51],
+      },
+      FoC: {
+        ">": [3, 4, 5, 11, 13, 49, 50, 51, 52],
+        "<=": [1, 6, 8, 9, 10, 47, 53, 54],
+      },
+      SCDF: {
+        ">": [1, 55],
+        "<=": [4, 5, 52, 54, 56, 57],
+      },
+      RDen: {
+        ">": [11, 14, 49, 56, 58],
+        "<=": [3, 4, 8, 10, 20, 47, 55, 60],
+      },
+    };
+
+    return refactorings[feature][comparator];
   },
 };
 

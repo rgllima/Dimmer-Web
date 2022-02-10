@@ -2,7 +2,7 @@
   <div class="quality-assessment">
     <div class="box">
       <div v-if="isLoading">
-        <div>Aguarde...</div>
+        <div>Wait...</div>
         <progress
           class="progress is-small is-primary mt-8"
           max="100"
@@ -17,6 +17,12 @@
             >{{ maintainabilityLabel }}</span
           >
         </div>
+        <button
+          class="quality-assessment__re-evaluate-button button is-primary"
+          @click="evaluate"
+        >
+          Re-evaluate
+        </button>
         <div class="quality-assessment__suggestion">
           <div class="quality-assessment__suggestion-title">
             Improvement Suggestion
@@ -33,12 +39,30 @@
             No suggestions
           </div>
         </div>
-        <button
-          class="quality-assessment__re-evaluate-button button is-primary"
-          @click="evaluate"
-        >
-          Re-evaluate
-        </button>
+        <div class="quality-assessment__refactorings">
+          <div class="quality-assessment__refactorings-title">
+            Refactoring Suggestions
+          </div>
+          <div v-if="refactoringSuggestions.length">
+            <div
+              v-for="(refactoring, index) in refactoringSuggestions"
+              :key="index"
+              class="quality-assessment__refactoring"
+            >
+              <div class="quality-assessment__refactoring-title">
+                Refactoring {{ refactoring }}
+              </div>
+              <img :src="getRefactoringImageUrl(refactoring)" alt="" />
+            </div>
+            <div class="quality-assessment__refactoring">
+              <div class="quality-assessment__refactoring-title">Legend</div>
+              <img src="../../../assets/refactorings/legend.png" alt="" />
+            </div>
+          </div>
+          <div v-else class="quality-assessment__no-refactorings">
+            No refactoring suggestions
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -55,12 +79,23 @@ export default {
       "maintainabilityLabel",
       "improvementSuggestionText",
       "improvementSuggestionTipText",
+      "refactoringSuggestions",
       "isLoading",
     ]),
   },
 
   methods: {
     ...mapActions("qualityAssessment", ["evaluate"]),
+
+    getRefactoringImageUrl(refactoring) {
+      var images = require.context(
+        "../../../assets/refactorings/",
+        false,
+        /\.png$/
+      );
+
+      return images("./r" + refactoring + ".png");
+    },
   },
 
   mounted() {
@@ -118,6 +153,32 @@ export default {
 
     &-tip {
       margin-top: px;
+    }
+  }
+
+  &__refactorings {
+    font-size: 14px;
+    margin-top: 16px;
+
+    &-title {
+      font-weight: 600;
+    }
+
+    &-no-refactorings {
+      margin-top: 4px;
+    }
+  }
+
+  &__refactoring {
+    margin-top: 16px;
+
+    &-title {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    img {
+      margin-left: -10px;
     }
   }
 
