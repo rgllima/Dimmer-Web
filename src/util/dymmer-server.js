@@ -1,6 +1,6 @@
 class dymmerServer {
   static getUrl() {
-    return "https://dymmer-web-backend.herokuapp.com";
+    return "https://wild-ruby-bream-hat.cyclic.app";
   }
 }
 
