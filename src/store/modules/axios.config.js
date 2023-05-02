@@ -1,7 +1,7 @@
 import router from "@/router";
 import axios from "axios";
 
-const baseURL = `https://dymmer-web-backend.herokuapp.com`;
+const baseURL = `https://wild-ruby-bream-hat.cyclic.app`;
 const instance = axios.create({ baseURL });
 
 instance.interceptors.request.use(
