@@ -5,7 +5,7 @@ const state = {
   userData: {
     nome: "Usuário",
   },
-  apiURL: `https://dymmer-web-backend.herokuapp.com`,
+  apiURL: `https://wild-ruby-bream-hat.cyclic.app`,
   error: null,
 };
 
